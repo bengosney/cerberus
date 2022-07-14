@@ -140,9 +140,9 @@ cssselect2==0.6.0 \
     --hash=sha256:3a83b2a68370c69c9cd3fcb88bbfaebe9d22edeef2c22d1ff3e1ed9c7fa45ed8 \
     --hash=sha256:5b5d6dea81a5eb0c9ca39f116c8578dd413778060c94c1f51196371618909325
     # via svglib
-django==4.0.5 \
-    --hash=sha256:502ae42b6ab1b612c933fb50d5ff850facf858a4c212f76946ecd8ea5b3bf2d9 \
-    --hash=sha256:f7431a5de7277966f3785557c3928433347d998c1e6459324501378a291e5aab
+django==4.0.6 \
+    --hash=sha256:a67a793ff6827fd373555537dca0da293a63a316fe34cb7f367f898ccca3c3ae \
+    --hash=sha256:ca54ebedfcbc60d191391efbf02ba68fb52165b8bf6ccd6fe71f098cac1fe59e
     # via
     #   -r requirements.in
     #   django-appconf

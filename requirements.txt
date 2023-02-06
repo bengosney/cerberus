@@ -518,8 +518,9 @@ pyyaml==6.0 \
     # via
     #   drf-spectacular
     #   pyhanko
-qrcode==7.3.1 \
-    --hash=sha256:375a6ff240ca9bd41adc070428b5dfc1dcfbb0f2507f1ac848f6cded38956578
+qrcode==7.4.2 \
+    --hash=sha256:581dca7a029bcb2deef5d01068e39093e80ef00b4a61098a2182eac59d01643a \
+    --hash=sha256:9dd969454827e127dbd93696b20747239e6d540e082937c90f14ac95b30f5845
     # via pyhanko
 reportlab==3.6.12 \
     --hash=sha256:07fdd968df7941c2bfb67b9bb4532f424992dfafc71b72a4e4b291ff707e6b0e \

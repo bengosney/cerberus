@@ -487,9 +487,9 @@ pycparser==2.21 \
     --hash=sha256:8ee45429555515e1f6b185e78100aea234072576aa43ab53aefcae078162fca9 \
     --hash=sha256:e644fdec12f7872f86c58ff790da456218b10f863970249516d60a5eaca77206
     # via cffi
-pyhanko==0.16.0 \
-    --hash=sha256:6bfb57cd09424fe28f991f239ea65412dfe7b475ccb96fa71e604535b4469da5 \
-    --hash=sha256:6f994ac466901d58d02cb5932cf4545e6cab57fbfb470a00dfc0bee5716dab69
+pyhanko==0.17.2 \
+    --hash=sha256:1a91049d1a13a0756304761a8331225fd9e929123e213affdfa48308bec6bb22 \
+    --hash=sha256:b1f027f0f63a0c9f6c457652c8d1f5c959e6569ec79cdcdbee19cf8f9f2ad423
     # via xhtml2pdf
 pyhanko-certvalidator==0.19.8 \
     --hash=sha256:5f86b4e14ffd8be7eb7ff0ff0894e046a01a1f05b7dd94e50f8b4d56c7bffc51 \

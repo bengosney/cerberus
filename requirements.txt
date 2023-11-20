@@ -489,9 +489,9 @@ pyhanko==0.16.0 \
     --hash=sha256:6bfb57cd09424fe28f991f239ea65412dfe7b475ccb96fa71e604535b4469da5 \
     --hash=sha256:6f994ac466901d58d02cb5932cf4545e6cab57fbfb470a00dfc0bee5716dab69
     # via xhtml2pdf
-pyhanko-certvalidator==0.19.8 \
-    --hash=sha256:5f86b4e14ffd8be7eb7ff0ff0894e046a01a1f05b7dd94e50f8b4d56c7bffc51 \
-    --hash=sha256:aed2b66de152995ecc645287167b559a8eff8947b82ef65227a086189d160324
+pyhanko-certvalidator==0.26.2 \
+    --hash=sha256:2a7ca0673f918b45cba2bc0026d3d23a35202e013d7262701fbc562269158792 \
+    --hash=sha256:d3ad4169aca30c0ffb7f30df045fd99fe18897a3ad38e03b1c29152e513d4dca
     # via
     #   pyhanko
     #   xhtml2pdf

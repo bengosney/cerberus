@@ -41,6 +41,7 @@ dependencies = [
   "psycopg2",
   "pytz",
   "reportlab==4.0.9",
+  "rules",
   "uritemplate",
   "wheel",
   "whitenoise",

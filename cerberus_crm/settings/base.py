@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "django.contrib.humanize",
+    "rules.apps.AutodiscoverRulesConfig",
     "fsm_admin2",
     "django_htmx",
     "django_extensions",
@@ -113,6 +114,10 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTHENTICATION_BACKENDS = (
+    "rules.permissions.ObjectPermissionBackend",
+    "django.contrib.auth.backends.ModelBackend",
+)
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/

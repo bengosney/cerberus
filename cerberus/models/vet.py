@@ -4,13 +4,15 @@ from django.urls import reverse
 
 # Third Party
 import reversion
+import rules
+from rules.contrib.models import RulesModelBase
 
 # Locals
 from ..fields import SqidsModelField as SqidsField
 
 
 @reversion.register()
-class Vet(models.Model):
+class Vet(RulesModelBase):
     # Fields
     name = models.CharField(max_length=255)
     phone = models.CharField(blank=True, default="", max_length=128)
@@ -22,6 +24,9 @@ class Vet(models.Model):
 
     class Meta:
         ordering = ("name",)
+        rules_permissions = {
+            "view": rules.is_owner,
+        }
 
     def __str__(self) -> str:
         return f"{self.name}"

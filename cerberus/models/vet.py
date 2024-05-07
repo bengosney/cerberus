@@ -4,15 +4,17 @@ from django.urls import reverse
 
 # Third Party
 import reversion
-import rules
-from rules.contrib.models import RulesModelBase
+from rules.contrib.models import RulesModel
+
+# Locals
+from .. import rules
 
 # Locals
 from ..fields import SqidsModelField as SqidsField
 
 
 @reversion.register()
-class Vet(RulesModelBase):
+class Vet(RulesModel):
     # Fields
     name = models.CharField(max_length=255)
     phone = models.CharField(blank=True, default="", max_length=128)

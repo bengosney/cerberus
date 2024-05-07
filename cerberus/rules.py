@@ -4,4 +4,6 @@ import rules
 
 @rules.predicate
 def is_owner(user, obj):
-    return obj.owner == user
+    if owner := getattr(obj, "owner", None):
+        return owner == user
+    return False

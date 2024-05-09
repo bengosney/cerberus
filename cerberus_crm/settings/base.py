@@ -233,11 +233,12 @@ SITE_ID = 1
 
 DJANGO_SQIDS_MIN_LENGTH = 6
 
+
+## Allauth settings
+
 SOCIALACCOUNT_PROVIDERS = {
     "google": {
-        # For each OAuth based provider, either add a ``SocialApp``
-        # (``socialaccount`` app) containing the required client
-        # credentials, or list them here:
+        "EMAIL_AUTHENTICATION": True,
         "APP": {
             "client_id": env["AA_GOOGLE_CLIENT_ID"],
             "secret": env["AA_GOOGLE_SECRET"],
@@ -249,3 +250,6 @@ SOCIALACCOUNT_PROVIDERS = {
         ],
     }
 }
+
+ACCOUNT_EMAIL_REQUIRED = True
+SOCIALACCOUNT_EMAIL_AUTHENTICATION_AUTO_CONNECT = True

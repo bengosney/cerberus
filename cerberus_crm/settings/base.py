@@ -11,10 +11,13 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 # Standard Library
 import datetime
+import os
 from pathlib import Path
 
 # Third Party
 from moneyed import GBP
+
+env = os.environ.copy()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
@@ -30,6 +33,10 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "django.contrib.humanize",
+    "allauth",
+    "allauth.account",
+    "allauth.socialaccount",
+    "allauth.socialaccount.providers.google",
     "fsm_admin2",
     "django_htmx",
     "django_extensions",
@@ -61,6 +68,7 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "cerberus.middleware.HtmxVaryHeaderMiddleware",
+    "allauth.account.middleware.AccountMiddleware",
 ]
 
 ROOT_URLCONF = "cerberus_crm.urls"
@@ -111,6 +119,11 @@ AUTH_PASSWORD_VALIDATORS = [
     {
         "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
     },
+]
+
+AUTHENTICATION_BACKENDS = [
+    "django.contrib.auth.backends.ModelBackend",
+    "allauth.account.auth_backends.AuthenticationBackend",
 ]
 
 
@@ -219,3 +232,20 @@ SERIALIZATION_MODULES = {"json": "djmoney.serializers"}
 SITE_ID = 1
 
 DJANGO_SQIDS_MIN_LENGTH = 6
+
+SOCIALACCOUNT_PROVIDERS = {
+    "google": {
+        # For each OAuth based provider, either add a ``SocialApp``
+        # (``socialaccount`` app) containing the required client
+        # credentials, or list them here:
+        "APP": {
+            "client_id": env["AA_GOOGLE_CLIENT_ID"],
+            "secret": env["AA_GOOGLE_SECRET"],
+            "key": env["AA_GOOGLE_KEY"],
+        },
+        "SCOPE": [
+            "profile",
+            "email",
+        ],
+    }
+}

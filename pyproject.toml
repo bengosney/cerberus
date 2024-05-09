@@ -16,6 +16,7 @@ dependencies = [
   "crispy-bulma",
   "dj-database-url",
   "django>=5",
+  "django-allauth[socialaccount]",
   "django-cors-headers",
   "django-crispy-forms",
   "django-extensions",

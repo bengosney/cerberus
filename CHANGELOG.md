@@ -23,8 +23,6 @@
 - **icon**: add a calendar plus icon to booking fab
 - **booking**: Update list on invoice actions
 - **bookings**: allow any confirmed booking and prelim bookings in the past to be completed
-- **bookings**: add a past bookings list to customer page
-- **deps**: update the decencies
 
 ### Fix
 
@@ -38,8 +36,18 @@
 - **CheckboxTable**: remove mutable default arg
 - **urls**: add trailing slash for completeable urls
 - **css**: remove overflow styling around tables
-- rename invalid module name
 
 ### Refactor
 
 - **UninvoicedCharges**: rename the UninvoicedChargesForm to better reflect its use
+
+## v0.1.0 (2024-06-19)
+
+### Feat
+
+- **bookings**: add a past bookings list to customer page
+- **deps**: update the decencies
+
+### Fix
+
+- rename invalid module name

@@ -1,0 +1,5 @@
+{% if not request.htmx %}
+    <a href="{% url 'invoice_create' %}" class="fab">
+        {% include 'icons/plus.svg' %}
+    </a>
+{% endif %}

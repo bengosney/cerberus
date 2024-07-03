@@ -12,6 +12,7 @@ class InvoiceForm(forms.ModelForm):
     class Meta:
         model = Invoice
         fields = [
+            "customer",
             "details",
             "due",
             "adjustment",
@@ -24,6 +25,12 @@ class InvoiceForm(forms.ModelForm):
             "adjustment": SingleMoneyWidget(),
             "due": forms.DateInput(attrs={"type": "date"}),
         }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        instance = getattr(self, "instance", None)
+        if instance and instance.pk:
+            self.fields["customer"].disabled = True
 
 
 class UninvoicedChargesForm(forms.Form):

@@ -6,16 +6,15 @@ on:
 jobs:
   updateChangelog:
     runs-on: ubuntu-latest
+    if: "!startsWith(github.event.head_commit.message, 'bump:') && !startsWith(github.event.head_commit.author.username, 'dependabot')"
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Create bump and changelog
-        uses: commitizen-tools/commitizen-action@master
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          push: false
+      - name: Update Changelog
+        run: |
+          python3 -m pip install Commitizen
+          cz changelog
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v6
         with:

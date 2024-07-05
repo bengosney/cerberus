@@ -13,5 +13,5 @@ jobs:
           fetch-depth: 0
       - name: Create bump and changelog
         uses: commitizen-tools/commitizen-action@master
-      - name: Release
-        uses: softprops/action-gh-release@v1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}

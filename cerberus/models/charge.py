@@ -72,8 +72,7 @@ class Charge(PolymorphicModel):
 
     customer: models.ForeignKey["Customer|None"] = models.ForeignKey(
         "cerberus.Customer",
-        on_delete=models.SET_NULL,
-        null=True,
+        on_delete=models.PROTECT,
         related_name="charges",
     )
 

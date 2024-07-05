@@ -49,6 +49,14 @@ class BookingSlotAdmin(admin.ModelAdmin):
 
 @admin.register(Charge)
 class ChargeAdmin(admin.ModelAdmin):
+    list_display = (
+        "name",
+        "line",
+        "quantity",
+        "state",
+        "customer",
+        "created",
+    )
     readonly_fields = ["state"]
 
 

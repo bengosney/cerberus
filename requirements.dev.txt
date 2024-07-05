@@ -399,9 +399,9 @@ django-crispy-forms==2.2 \
     # via
     #   cerberus (pyproject.toml)
     #   crispy-bulma
-django-debug-toolbar==4.4.3 \
-    --hash=sha256:1418397daa1bd41d0c282e6cb20756eec008cb8e1330cf776de45e58b1e5b44c \
-    --hash=sha256:c01296649dcaa05522d58bbb29461b5def06b687bf2af767069b5f805ac57d43
+django-debug-toolbar==4.4.5 \
+    --hash=sha256:8298ce966b4c8fc71430082dd4739ef2badb5f867734e1973a413c4ab2ea81b7 \
+    --hash=sha256:91425606673ee674d780f7aeedf3595c264eb382dcf41f55c6779577900904c0
     # via cerberus (pyproject.toml)
 django-debugtools==2.0 \
     --hash=sha256:085f7bc62a3a5c81c7a0d8643dbc7dfd991cfdffabe7a6d6fbecad0e346608ff \

@@ -2,6 +2,7 @@
 
 ### Feat
 
+- **charge-admin**: display more useful list columns
 - **invoice**: form to invoice uninvoiced charges
 - **charges**: queryset with some helpers for charges
 - **fields**: grouped multiple model choice field
@@ -26,6 +27,7 @@
 
 ### Fix
 
+- **charges**: don't allow charges to be created that are not assigned to a customer
 - **checkbox-table**: don't join string values
 - **checkbox-table**: ensure we set the column titles
 - **checkbox-table**: don't join string values

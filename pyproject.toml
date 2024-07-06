@@ -57,6 +57,7 @@ dependencies = [
 optional-dependencies.dev = [
   "black",
   "cogapp",
+  "commitizen",
   "django-browser-reload",
   "django-debug-toolbar",
   "django-debugtools",

@@ -7,7 +7,6 @@ from operator import or_
 from typing import TYPE_CHECKING, Self
 
 # Django
-from django.contrib.contenttypes.fields import GenericRelation
 from django.core.exceptions import ValidationError
 from django.db import models, transaction
 from django.db.models import CheckConstraint, F, Max, Min, Q
@@ -275,6 +274,8 @@ class Booking(models.Model):
     get_available_state_transitions: Callable[[], Iterable[Transition]]
 
     # Fields
+    charges: "QuerySet[BookingCharge]"
+
     created = models.DateTimeField(auto_now_add=True, editable=False)
     last_updated = models.DateTimeField(auto_now=True, editable=False)
     cost = MoneyField(max_digits=14, default=0.0)
@@ -298,8 +299,6 @@ class Booking(models.Model):
     )
     _booking_slot_id: int | None
     _previous_slot: BookingSlot | None = None
-
-    charges = GenericRelation(Charge)
 
     sqid = SqidsField(real_field_name="id")
 
@@ -529,4 +528,4 @@ class Booking(models.Model):
 
 
 class BookingCharge(Charge):
-    booking = models.ForeignKey(Booking, on_delete=models.PROTECT)
+    booking = models.ForeignKey(Booking, on_delete=models.PROTECT, related_name="charges")

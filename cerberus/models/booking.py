@@ -1,7 +1,7 @@
 # Standard Library
 from collections.abc import Callable, Iterable, Iterator
-from dataclasses import dataclass
 from datetime import date, datetime, timedelta
+from enum import Enum, auto
 from functools import reduce
 from operator import or_
 from typing import TYPE_CHECKING, Self
@@ -24,6 +24,7 @@ from humanize import naturaldate
 from ..decorators import save_after
 from ..exceptions import IncorectServiceError, MaxCustomersError, MaxPetsError, SlotOverlapsError
 from ..fields import SqidsModelField as SqidsField
+from ..model_utils import TransitionActionsMixin
 from ..utils import make_aware
 from .charge import Charge
 from .service import Service
@@ -33,17 +34,11 @@ if TYPE_CHECKING:
     from . import Customer, Pet, Service
 
 
-@dataclass(slots=True)
-class BookingTransition:
-    name: str
-    icon: str = ""
-    sort: int = 0
-
-    def __str__(self) -> str:
-        return self.name
-
-    def get(self, key: str, default: str) -> str:
-        return getattr(self, key, default)
+class TransitionOrder(Enum):
+    confirm = auto()
+    reopen = auto()
+    complete = auto()
+    cancel = auto()
 
 
 class BookingSlot(models.Model):
@@ -249,7 +244,7 @@ class BookingQuerySet(models.QuerySet):
 
 
 @reversion.register()
-class Booking(models.Model):
+class Booking(models.Model, TransitionActionsMixin):
     STATES_MOVEABLE: list[str] = [
         BookingStates.ENQUIRY.value,
         BookingStates.PRELIMINARY.value,
@@ -477,7 +472,7 @@ class Booking(models.Model):
         field=state,
         source=STATES_CONFIRMABLE,  # type: ignore
         target=BookingStates.CONFIRMED.value,
-        custom={"icon": "icons/calendar.svg", "sort": 60},
+        custom={"icon": "icons/calendar.svg", "sort": TransitionOrder.confirm.value},
     )
     def confirm(self) -> None:
         pass
@@ -487,7 +482,7 @@ class Booking(models.Model):
         field=state,
         source=STATES_CANCELABLE,  # type: ignore
         target=BookingStates.CANCELED.value,
-        custom={"icon": "icons/cancel.svg", "sort": 90},
+        custom={"icon": "icons/cancel.svg", "sort": TransitionOrder.cancel.value},
     )
     def cancel(self) -> None:
         self._booking_slot = None
@@ -497,7 +492,7 @@ class Booking(models.Model):
         field=state,
         source=BookingStates.CANCELED.value,
         target=BookingStates.PRELIMINARY.value,
-        custom={"icon": "icons/reopen.svg", "sort": 80},
+        custom={"icon": "icons/reopen.svg", "sort": TransitionOrder.reopen.value},
     )
     def reopen(self) -> None:
         self._booking_slot = self._get_new_booking_slot()
@@ -508,23 +503,10 @@ class Booking(models.Model):
         source=STATES_COMPLETABLE,  # type: ignore
         target=BookingStates.COMPLETED.value,
         conditions=[can_complete],
-        custom={"icon": "icons/calendar-check.svg", "sort": 70},
+        custom={"icon": "icons/calendar-check.svg", "sort": TransitionOrder.complete.value},
     )
     def complete(self) -> list[Charge]:
         return self.create_charges()
-
-    @property
-    def available_state_transitions(self) -> Iterable[BookingTransition]:
-        transitions = [
-            BookingTransition(
-                name=t.name,
-                icon=t.custom.get("icon", ""),
-                sort=t.custom.get("sort", 0),
-            )
-            for t in self.get_available_state_transitions()
-        ]
-        transitions.sort(key=lambda x: x.sort)
-        return transitions
 
 
 class BookingCharge(Charge):

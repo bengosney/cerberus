@@ -1,4 +1,4 @@
-<tr class="invoice">
+<tr class="invoice" id="{{ invoice.name }}">
     <td>{{ invoice.name }}</td>
     <td>{{ invoice.customer }}</td>
     <td class="right">{{ invoice.total }}</td>
@@ -8,6 +8,37 @@
         <td>{{ invoice.state|title }}</td>
     {% endif %}
     <td>
-        <a href="{% url 'invoice_detail' invoice.id %}">Details</a>
+        {% spaceless %}
+            <div class="actions">
+                <a href="{% url 'invoice_detail' invoice.id %}" data-tooltip="Details">
+                    <span class="icon">{% include "icons/details.svg" %}</span>
+                    <span class="title">Details</span>
+                </a>
+                {% for transition in invoice.available_state_transitions %}
+                    {% if transition.url %}
+                        <a
+                            href="{% url transition.url invoice.id %}"
+                            hx-get="{% url transition.url invoice.id %}"
+                            hx-target="main"
+                            hx-swap="afterend"
+                            data-tooltip="{{ transition|title }}"
+                        >
+                    {% else %}
+                        <a
+                            hx-target="#{{ invoice.name }}"
+                            hx-swap="outerHTML"
+                            hx-get="{% url 'invoice_action' invoice.id transition %}"
+                            href="{% url 'invoice_action' invoice.id transition %}"
+                            data-tooltip="{{ transition|title }}"
+                        >
+                    {% endif %}
+                    {% if transition.icon %}
+                        <span class="icon">{% include transition.icon %}</span>
+                    {% endif %}
+                    <span class="title">{{ transition|title }}</span>
+                    </a>
+                {% endfor %}
+            </div>
+        {% endspaceless %}
     </td>
 </tr>

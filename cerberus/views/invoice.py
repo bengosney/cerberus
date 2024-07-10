@@ -131,6 +131,29 @@ class InvoiceActionsView(TransitionView):
     model = Invoice
     field = "state"
 
+    def htmx_render(self, request, action: str, **kwargs):
+        lookup_value = kwargs.get(self.lookup_field)
+        model = self.get_valid_model(lookup_value, action)
+        return render(
+            request,
+            "cerberus/components/invoice_row.html",
+            {"invoice": model},
+        )
+
+    def get(self, request: HttpRequest, action: str, **kwargs):
+        redirect = super().get(request, action, **kwargs)
+        if not request.htmx or request.GET.get("mode") != "list":
+            return redirect
+
+        return self.htmx_render(request, action, **kwargs)
+
+    def post(self, request, action: str, **kwargs):
+        redirect = super().post(request, action, **kwargs)
+        if not request.htmx:
+            return redirect
+
+        return self.htmx_render(request, action, **kwargs)
+
 
 class InvoiceableView(FormView):
     form_class = UninvoicedChargesForm

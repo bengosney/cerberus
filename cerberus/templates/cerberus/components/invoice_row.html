@@ -15,27 +15,25 @@
                     <span class="title">Details</span>
                 </a>
                 {% for transition in invoice.available_state_transitions %}
-                    {% if transition.url %}
-                        <a
+                    <a
+                        {% if transition.url %}
                             href="{% url transition.url invoice.id %}"
                             hx-get="{% url transition.url invoice.id %}"
                             hx-target="main"
                             hx-swap="afterend"
-                            data-tooltip="{{ transition|title }}"
-                        >
-                    {% else %}
-                        <a
+                        {% else %}
+                            href="{% url 'invoice_action' invoice.id transition %}"
+                            hx-get="{% url 'invoice_action' invoice.id transition %}"
                             hx-target="#{{ invoice.name }}"
                             hx-swap="outerHTML"
-                            hx-get="{% url 'invoice_action' invoice.id transition %}"
-                            href="{% url 'invoice_action' invoice.id transition %}"
-                            data-tooltip="{{ transition|title }}"
-                        >
-                    {% endif %}
-                    {% if transition.icon %}
-                        <span class="icon">{% include transition.icon %}</span>
-                    {% endif %}
-                    <span class="title">{{ transition|title }}</span>
+                        {% endif %}
+                        hx-vals='{"mode":"list"}'
+                        data-tooltip="{{ transition|title }}"
+                    >
+                        {% if transition.icon %}
+                            <span class="icon">{% include transition.icon %}</span>
+                        {% endif %}
+                        <span class="title">{{ transition|title }}</span>
                     </a>
                 {% endfor %}
             </div>

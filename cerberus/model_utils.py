@@ -1,6 +1,7 @@
 # Standard Library
 from collections.abc import Iterable
-from dataclasses import dataclass
+from dataclasses import dataclass, field
+from typing import Any
 
 
 @dataclass(slots=True)
@@ -8,7 +9,7 @@ class Transition:
     name: str
     icon: str = ""
     sort: int = 0
-    url: str = ""
+    meta: dict[str, Any] = field(default_factory=dict)
 
     def __str__(self) -> str:
         return self.name
@@ -25,9 +26,9 @@ class TransitionActionsMixin:
                 name=t.name,
                 icon=t.custom.get("icon", ""),
                 sort=t.custom.get("sort", 0),
-                url=t.custom.get("url", ""),
+                meta=t.custom,
             )
-            for t in self.get_available_state_transitions()
+            for t in self.get_available_state_transitions()  # type: ignore
         ]
         transitions.sort(key=lambda x: x.sort)
         return transitions

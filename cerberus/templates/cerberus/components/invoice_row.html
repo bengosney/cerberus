@@ -16,9 +16,9 @@
                 </a>
                 {% for transition in invoice.available_state_transitions %}
                     <a
-                        {% if transition.url %}
-                            href="{% url transition.url invoice.id %}"
-                            hx-get="{% url transition.url invoice.id %}"
+                        {% if transition.meta.url %}
+                            href="{% url transition.meta.url invoice.id %}"
+                            hx-get="{% url transition.meta.url invoice.id %}"
                             hx-target="main"
                             hx-swap="afterend"
                         {% else %}

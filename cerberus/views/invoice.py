@@ -140,19 +140,19 @@ class InvoiceActionsView(TransitionView):
             {"invoice": model},
         )
 
-    def get(self, request: HttpRequest, action: str, **kwargs):
-        redirect = super().get(request, action, **kwargs)
+    def process(self, request, redirect, **kwargs):
         if not request.htmx or request.GET.get("mode") != "list":
             return redirect
 
-        return self.htmx_render(request, action, **kwargs)
+        return self.htmx_render(request, **kwargs)
+
+    def get(self, request: HttpRequest, action: str, **kwargs):
+        redirect = super().get(request, action, **kwargs)
+        return self.process(request, redirect, action=action, **kwargs)
 
     def post(self, request, action: str, **kwargs):
         redirect = super().post(request, action, **kwargs)
-        if not request.htmx:
-            return redirect
-
-        return self.htmx_render(request, action, **kwargs)
+        return self.process(request, redirect, action=action, **kwargs)
 
 
 class InvoiceableView(FormView):

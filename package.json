@@ -22,7 +22,7 @@
     "@alpinejs/mask": "^3.13.8",
     "@alpinejs/morph": "^3.13.9",
     "alpinejs": "^3.13.8",
-    "htmx.org": "^1.9.12"
+    "htmx.org": "^2.0.0"
   },
   "prettier": {
     "printWidth": 120

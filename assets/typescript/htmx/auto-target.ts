@@ -10,11 +10,12 @@ const createAutoTargetExtension = (htmx: HTMX) => {
     };
 
     htmx.defineExtension('auto-target', {
-        onEvent: function (name, event) {
-            if (name == 'htmx:beforeSwap' && event.detail.requestConfig.headers["HX-Target"] == null) {
-                const target = getTarget(event.detail.serverResponse);
+        onEvent: function (name, { detail }) {
+            if (name == 'htmx:beforeSwap' && detail.requestConfig.headers["HX-Target"] == null) {
+                const target = getTarget(detail.serverResponse);
                 if (target) {
-                    event.detail.target = target;
+                    detail.target = target;
+                    detail.requestConfig.swap = detail.requestConfig.swap || "outerHTML";
                 }
             }
         }

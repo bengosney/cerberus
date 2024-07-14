@@ -9,8 +9,8 @@ REQS=$(shell python -c 'import tomllib;[print(f"requirements.{k}.txt") for k in 
 CSS_FILES:=$(shell find assets -name *.css)
 COG_FILE:=.cogfiles
 
-TS_FILES:=$(wildcard assets/typescript/*.ts)
-JS_FILES:=$(patsubst assets/typescript/%.ts,cerberus_crm/static/js/%.min.js,$(TS_FILES))
+TS_FILES:=$(shell find assets/typescript -name *.ts)
+JS_FILES:=$(patsubst assets/typescript/%.ts,cerberus_crm/static/js/%.min.js,$(wildcard assets/typescript/*.ts))
 
 PYTHON_VERSION:=$(shell python --version | cut -d " " -f 2)
 PIP_PATH:=.direnv/python-$(PYTHON_VERSION)/bin/pip

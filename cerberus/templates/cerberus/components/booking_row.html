@@ -16,8 +16,6 @@
                 </a>
                 {% for transition in booking.available_state_transitions %}
                     <a
-                        hx-target="#{{ booking.sqid }}"
-                        hx-swap="outerHTML"
                         hx-get="{% url 'booking_action' booking.sqid transition %}"
                         href="{% url 'booking_action' booking.sqid transition %}"
                         data-tooltip="{{ transition|title }}"

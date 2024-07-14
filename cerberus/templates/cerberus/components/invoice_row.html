@@ -24,8 +24,6 @@
                         {% else %}
                             href="{% url 'invoice_action' invoice.id transition %}"
                             hx-get="{% url 'invoice_action' invoice.id transition %}"
-                            hx-target="#{{ invoice.name }}"
-                            hx-swap="outerHTML"
                         {% endif %}
                         hx-vals='{"mode":"list"}'
                         data-tooltip="{{ transition|title }}"

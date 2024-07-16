@@ -15,7 +15,10 @@
   {% endif %}
 
   <form method="post">
-    {{ formset.management_form }} {% for f in formset %}
+    {{ form|crispy }}
+    <hr />
+    {{ formset.management_form }}
+    {% for f in formset %}
       <div class="inline gap" x-data="{ line: '', quantity: '' }">
         {{ f|crispy }}
         <div class="field">
@@ -31,10 +34,7 @@
         </div>
       </div>
     {% endfor %}
-
-    <hr />
-
-    {{ form|crispy }} {% csrf_token %}
+    {% csrf_token %}
     <input type="submit" class="button" value="Save" />
   </form>
 {% endblock %}

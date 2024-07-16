@@ -17,7 +17,6 @@ class InvoiceForm(forms.ModelForm):
             "due",
             "adjustment",
             "customer_name",
-            "sent_to",
             "invoice_address",
             "send_notes",
         ]

@@ -21,7 +21,7 @@
     {% for f in formset %}
       <div class="inline gap charge-row" x-data="{ line: '', quantity: '' }">
         {{ f|crispy }}
-        <div class="field">
+        <div class="field total">
           <label class="label"> Total </label>
           <div class="control">
             <input

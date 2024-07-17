@@ -18,5 +18,11 @@
         }
       }
     }
+
+    .field.total {
+      input {
+        cursor: default;
+      }
+    }
   }
 }

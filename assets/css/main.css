@@ -27,6 +27,8 @@
 @import "list-customer.css";
 @import "list-invoice.css";
 
+@import "invoice-form.css";
+
 @import "form.css";
 @import "range-input.css";
 @import "checkbox-dropdown.css";

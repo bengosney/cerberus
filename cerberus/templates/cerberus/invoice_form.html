@@ -14,12 +14,12 @@
     <h2>Edit {{ view.model | verbose_name }}: {{ object.name }}</h2>
   {% endif %}
 
-  <form method="post">
+  <form method="post" class="invoice-form">
     {{ form|crispy }}
     <hr />
     {{ formset.management_form }}
     {% for f in formset %}
-      <div class="inline gap" x-data="{ line: '', quantity: '' }">
+      <div class="inline gap charge-row" x-data="{ line: '', quantity: '' }">
         {{ f|crispy }}
         <div class="field">
           <label class="label"> Total </label>

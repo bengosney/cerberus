@@ -1,0 +1,22 @@
+.invoice-form {
+  .charge-row {
+    .form-group:has(.checkbox) {
+      margin-top: 0.1em;
+      order: 999;
+    }
+
+    .checkbox {
+      label {
+        display: flex;
+        flex-direction: column-reverse;
+        gap: calc(var(--pico-spacing) * 0.375);
+        align-items: center;
+
+        input {
+          margin: calc(0.1em + var(--pico-form-element-spacing-vertical)) 0 0;
+          padding: 0;
+        }
+      }
+    }
+  }
+}

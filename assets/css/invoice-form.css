@@ -1,6 +1,67 @@
 .invoice-form {
+  .row-headings {
+    input {
+      display: none;
+    }
+  }
+  .charges {
+    list-style: none;
+    counter-reset: item;
+    margin: 0;
+    padding: 0;
+
+    input {
+      margin-bottom: 0;
+    }
+
+    & li {
+      + li {
+        counter-increment: item;
+        margin-bottom: var(--pico-spacing);
+        label {
+          display: none;
+        }
+      }
+
+      &:first-child {
+        .controls {
+          height: 0;
+          overflow: hidden;
+        }
+        div[id$="-DELETE"] label {
+          height: 0;
+          overflow: hidden;
+        }
+        &::before {
+          content: "";
+          width: 1em;
+        }
+      }
+
+      &:has(div[id$="-DELETE"]) {
+        .form-group {
+          transition: opacity 0.2s;
+        }
+      }
+
+      &:has(div[id$="-DELETE"] input:checked) {
+        .form-group:not(:has(div[id$="-DELETE"])) {
+          opacity: 0.25;
+          pointer-events: none;
+        }
+      }
+
+      &::before {
+        margin-right: 0.25em;
+        content: counter(item);
+        display: flex;
+        align-items: center;
+      }
+    }
+  }
+
   .charge-row {
-    .form-group:has(.checkbox) {
+    .form-group:has(div[id$="-DELETE"].checkbox) {
       margin-top: 0.1em;
       order: 999;
     }
@@ -11,9 +72,10 @@
         flex-direction: column-reverse;
         gap: calc(var(--pico-spacing) * 0.375);
         align-items: center;
+        line-height: 1em;
 
         input {
-          margin: calc(0.1em + var(--pico-form-element-spacing-vertical)) 0 0;
+          margin: 0;
           padding: 0;
         }
       }
@@ -23,6 +85,12 @@
       input {
         cursor: default;
       }
+    }
+  }
+
+  button {
+    svg {
+      display: inline-block;
     }
   }
 }

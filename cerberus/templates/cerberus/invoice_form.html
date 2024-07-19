@@ -14,26 +14,34 @@
     <h2>Edit {{ view.model | verbose_name }}: {{ object.name }}</h2>
   {% endif %}
 
-  <form method="post" class="invoice-form">
+  <form
+    method="post"
+    class="invoice-form"
+    x-data="{# fmt:off #}{
+      form_count: {{ formset.total_form_count }},
+      inital_form_count: {{ formset.total_form_count }},
+      addLine() {
+        this.form_count++;
+        document.querySelector('#id_charges-TOTAL_FORMS').value = this.form_count;
+        $nextTick(() => { removeFormPrefix(document.querySelector('.charges'), this.form_count - 1) });
+      },
+    }{# fmt:on #}"
+  >
     {{ form|crispy }}
     <hr />
     {{ formset.management_form }}
-    {% for f in formset %}
-      <div class="inline gap charge-row" x-data="{ line: '', quantity: '' }">
-        {{ f|crispy }}
-        <div class="field total">
-          <label class="label"> Total </label>
-          <div class="control">
-            <input
-              readonly
-              type="number"
-              x-model.number="line * quantity"
-              class="numberinput input"
-            />
-          </div>
-        </div>
-      </div>
-    {% endfor %}
+    <ol class="charges">
+      {% include "cerberus/invoice_charge_row.html" with form=formset.empty_form %}
+      {% for f in formset %}
+        {% include "cerberus/invoice_charge_row.html" with form=f %}
+      {% endfor %}
+      <template x-for="i in (form_count - inital_form_count)">
+        {% include "cerberus/invoice_charge_row.html" with form=formset.empty_form %}
+      </template>
+    </ol>
+    <button type="button" @click="addLine()" title="Add a new line to the invoice">
+      {% include 'icons/plus.svg' %} Add line
+    </button>
     {% csrf_token %}
     <input type="submit" class="button" value="Save" />
   </form>

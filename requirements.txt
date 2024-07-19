@@ -927,3 +927,7 @@ xhtml2pdf==0.2.16 \
     --hash=sha256:7391adac12afb086561667cdc8d6ef0ac4afe5097bd97383622d42b6343dee71 \
     --hash=sha256:b37040127627aee42f76f25ebbd5798308ffc93edaf4850a4d3dd894160ebb53
     # via cerberus (pyproject.toml)
+zealot==0.2.3 \
+    --hash=sha256:a26e6158aabcadc2944f55c9bcbeebd7dd44c72c8a60fd1b247e0b8dfa522108 \
+    --hash=sha256:e802c9e24e37377baa9126127bc3bac946cdcc62941f011ab6fb5354bd390513
+    # via cerberus (pyproject.toml)

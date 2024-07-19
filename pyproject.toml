@@ -53,6 +53,7 @@ dependencies = [
   "wheel",
   "whitenoise",
   "xhtml2pdf",
+  "zealot",
 ]
 optional-dependencies.dev = [
   "black",

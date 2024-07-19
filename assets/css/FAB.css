@@ -8,8 +8,8 @@
   position: fixed;
   z-index: 999;
   display: flex;
-  bottom: var(--pico-spacing);
   right: var(--pico-spacing);
+  bottom: var(--pico-spacing);
   border-radius: 50%;
   width: var(--fab-size);
   height: var(--fab-size);
@@ -49,5 +49,14 @@
   svg {
     width: calc(var(--fab-size) / 1.5);
     height: calc(var(--fab-size) / 1.5);
+  }
+}
+
+.fab-container {
+  position: relative;
+  display: block;
+  .fab {
+    position: sticky;
+    right: 0;
   }
 }

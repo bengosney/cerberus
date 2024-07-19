@@ -1,2 +1,2 @@
 <h3>Bookings</h3>
-{% include "cerberus/components/booking_list.html" with bookings=customer.bookings.all hide_customer=True %}
+{% include "cerberus/components/booking_list.html" with bookings=customer.bookings.with_pets.with_service hide_customer=True %}

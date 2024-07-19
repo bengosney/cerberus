@@ -53,6 +53,7 @@ dependencies = [
   "wheel",
   "whitenoise",
   "xhtml2pdf",
+  "zealot",
 ]
 optional-dependencies.dev = [
   "black",
@@ -81,7 +82,6 @@ optional-dependencies.dev = [
   "ruff",
   "setuptools-scm",
   "types-python-dateutil",
-  "zealot",
 ]
 urls.homepage = "https://cerberus.stretchtheirlegs.co.uk/"
 urls.repository = "http://www.github.com/bengosney/cerberus"

@@ -2,6 +2,7 @@
 
 ### Feat
 
+- **n+1**: add zealot to catch n+1 querys
 - **charge-admin**: display more useful list columns
 - **invoice**: form to invoice uninvoiced charges
 - **charges**: queryset with some helpers for charges
@@ -41,7 +42,12 @@
 
 ### Refactor
 
+- **n+1**: move zelot to a normal dep so I can ignore some queries
 - **UninvoicedCharges**: rename the UninvoicedChargesForm to better reflect its use
+
+### Perf
+
+- **n+1**: prevent some n+1 queries
 
 ## v0.1.0 (2024-06-19)
 

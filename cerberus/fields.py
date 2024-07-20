@@ -1,16 +1,18 @@
 # Standard Library
 import random
 import zlib
+from collections.abc import Iterable
 from functools import lru_cache, partial
 from itertools import groupby
 from operator import attrgetter
+from typing import Any
 
 # Django
 from django.forms.models import ModelChoiceIterator, ModelMultipleChoiceField
 
 # Third Party
 from django_sqids import SqidsField
-from sqids import Sqids
+from sqids import Sqids  # type: ignore
 
 
 @lru_cache
@@ -23,6 +25,7 @@ def shuffled_alphabet(model_name: str) -> str:
 
 class SqidsModelField(SqidsField):
     _sqids_instance: Sqids | None = None
+    alphabet: str | None = None
 
     @property
     def sqids_instance(self) -> Sqids:
@@ -73,12 +76,13 @@ class GroupedModelChoiceIterator(ModelChoiceIterator):
     def __iter__(self):
         if self.field.empty_label is not None:
             yield ("", self.field.empty_label)
-        queryset = self.queryset
-        # Can't use iterator() when queryset uses prefetch_related()
-        if not queryset._prefetch_related_lookups:
-            queryset = queryset.iterator()
-        for group, objs in groupby(queryset, self.groupby):
-            yield (group, [self.choice(obj) for obj in objs])
+        queryset: Iterable[Any] | None = self.queryset
+        if queryset is not None:
+            # Can't use iterator() when queryset uses prefetch_related()
+            if not getattr(queryset, "_prefetch_related_lookups", False) and hasattr(queryset, "iterator"):
+                queryset = queryset.iterator()
+            for group, objs in groupby(queryset or [], self.groupby):
+                yield (group, [self.choice(obj) for obj in objs])
 
 
 class GroupedMultipleModelChoiceField(ModelMultipleChoiceField):

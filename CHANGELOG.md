@@ -1,5 +1,9 @@
 ## Unreleased
 
+### Refactor
+
+- **deps**: zelot has been renamed to zeal
+
 ## v0.2.0 (2024-07-20)
 
 ### Feat

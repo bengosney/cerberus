@@ -19,7 +19,7 @@ import reversion
 from django_fsm import FSMField, Transition, transition
 from djmoney.models.fields import MoneyField
 from humanize import naturaldate
-from zealot import zealot_ignore
+from zeal import zeal_ignore
 
 # Locals
 from ..decorators import save_after
@@ -116,7 +116,7 @@ class BookingSlot(models.Model):
 
     @property
     def can_move(self) -> bool:
-        with zealot_ignore():
+        with zeal_ignore():
             return all(b.can_move for b in self.bookings.all())
 
     def move_slot(self, start: datetime | date, end: datetime | None = None) -> bool:

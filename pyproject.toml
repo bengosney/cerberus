@@ -39,6 +39,7 @@ dependencies = [
   "django-sqids",
   "django-taggit",
   "django-vanilla-views",
+  "django-zeal",
   "djangorestframework",
   "djangorestframework-simplejwt[crypto]",
   "drf-spectacular",
@@ -47,13 +48,13 @@ dependencies = [
   "markdown",
   "mjml-python",
   "psycopg2",
+  "python-bidi==0.4.*",
   "pytz",
   "reportlab==4.2.2",
   "uritemplate",
   "wheel",
   "whitenoise",
   "xhtml2pdf",
-  "zealot",
 ]
 optional-dependencies.dev = [
   "black",

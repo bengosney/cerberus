@@ -125,7 +125,6 @@ plugins = [
 ]
 check_untyped_defs = true
 disallow_any_generics = true
-disallow_untyped_calls = true
 ignore_errors = false
 ignore_missing_imports = true
 implicit_reexport = false

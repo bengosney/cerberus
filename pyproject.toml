@@ -39,6 +39,7 @@ dependencies = [
   "django-sqids",
   "django-taggit",
   "django-vanilla-views",
+  "django-zeal",
   "djangorestframework",
   "djangorestframework-simplejwt[crypto]",
   "drf-spectacular",
@@ -54,7 +55,6 @@ dependencies = [
   "wheel",
   "whitenoise",
   "xhtml2pdf",
-  "zealot",
 ]
 optional-dependencies.dev = [
   "black",

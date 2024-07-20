@@ -4,7 +4,7 @@ from typing import Self
 
 # Django
 from django.db import transaction
-from django.forms import modelformset_factory
+from django.forms import inlineformset_factory
 from django.http import HttpRequest, HttpResponse, HttpResponseNotAllowed, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse_lazy
@@ -27,18 +27,18 @@ class InvoiceUpdateView(UpdateView):
         return reverse_lazy("invoice_detail", kwargs={"pk": self.object.id})
 
     def get_formset(self):
-        return modelformset_factory(Charge, form=ChargeForm, extra=1)
+        return inlineformset_factory(Invoice, Charge, form=ChargeForm, extra=1)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
         formset = self.get_formset()
-        context["formset"] = formset(queryset=context["object"].charges.all())
+        context["formset"] = formset(instance=self.get_object(), queryset=context["object"].charges.all())
 
         return context
 
     def post(self, request, *args, **kwargs):
-        formset = self.get_formset()(data=request.POST, files=request.FILES)
+        formset = self.get_formset()(instance=self.get_object(), data=request.POST, files=request.FILES)
         if formset.is_valid():
             formset.save()
             return super().post(request, *args, **kwargs)
@@ -130,6 +130,29 @@ class InvoiceCRUD(CRUDViews):
 class InvoiceActionsView(TransitionView):
     model = Invoice
     field = "state"
+
+    def htmx_render(self, request, action: str, **kwargs):
+        lookup_value = kwargs.get(self.lookup_field)
+        model = self.get_valid_model(lookup_value, action)
+        return render(
+            request,
+            "cerberus/components/invoice_row.html",
+            {"invoice": model},
+        )
+
+    def process(self, request, redirect, **kwargs):
+        if not request.htmx or request.GET.get("mode") != "list":
+            return redirect
+
+        return self.htmx_render(request, **kwargs)
+
+    def get(self, request: HttpRequest, action: str, **kwargs):
+        redirect = super().get(request, action, **kwargs)
+        return self.process(request, redirect, action=action, **kwargs)
+
+    def post(self, request, action: str, **kwargs):
+        redirect = super().post(request, action, **kwargs)
+        return self.process(request, redirect, action=action, **kwargs)
 
 
 class InvoiceableView(FormView):

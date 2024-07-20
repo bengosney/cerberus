@@ -1,0 +1,40 @@
+<tr class="invoice" id="{{ invoice.name }}">
+    <td>{{ invoice.name }}</td>
+    <td>{{ invoice.customer }}</td>
+    <td class="right">{{ invoice.total }}</td>
+    {% if invoice.state == "unpaid" %}
+        <td><span class="{% if invoice.overdue %}overdue{% endif %}">Due {{ invoice.due }}</span></td>
+    {% else %}
+        <td>{{ invoice.state|title }}</td>
+    {% endif %}
+    <td>
+        {% spaceless %}
+            <div class="actions">
+                <a href="{% url 'invoice_detail' invoice.id %}" data-tooltip="Details">
+                    <span class="icon">{% include "icons/details.svg" %}</span>
+                    <span class="title">Details</span>
+                </a>
+                {% for transition in invoice.available_state_transitions %}
+                    <a
+                        {% if transition.meta.url %}
+                            href="{% url transition.meta.url invoice.id %}"
+                            hx-get="{% url transition.meta.url invoice.id %}"
+                            hx-target="main"
+                            hx-swap="afterend"
+                        {% else %}
+                            href="{% url 'invoice_action' invoice.id transition %}"
+                            hx-get="{% url 'invoice_action' invoice.id transition %}"
+                        {% endif %}
+                        hx-vals='{"mode":"list"}'
+                        data-tooltip="{{ transition|title }}"
+                    >
+                        {% if transition.icon %}
+                            <span class="icon">{% include transition.icon %}</span>
+                        {% endif %}
+                        <span class="title">{{ transition|title }}</span>
+                    </a>
+                {% endfor %}
+            </div>
+        {% endspaceless %}
+    </td>
+</tr>

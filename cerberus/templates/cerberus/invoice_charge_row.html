@@ -1,0 +1,21 @@
+{% load crispy_forms_tags %}
+
+<li
+    class="inline gap charge-row"
+    x-data="{ line: '', quantity: '', total: 0 }"
+    x-effect="total = line * quantity"
+>
+    {{ form|crispy }}
+    <div class="field total form-group">
+        <label class="label"> Total </label>
+        <div class="controls">
+            <input
+                readonly
+                type="number"
+                x-model.number="total"
+                class="numberinput input"
+                tabindex="-1"
+            />
+        </div>
+    </div>
+</li>

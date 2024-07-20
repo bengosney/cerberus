@@ -14,6 +14,7 @@ from moneyed import Money
 from xhtml2pdf.context import pisaContext
 
 # Locals
+from ..model_utils import Transition
 from ..models import Charge, Customer, Invoice, Payment
 
 
@@ -113,7 +114,10 @@ def test_loaded_total(invoice):
 @pytest.mark.django_db
 def test_available_state_transitions(invoice: Invoice):
     available_state_transitions = invoice.available_state_transitions
-    expected_state_transitions = ["send", "void"]
+    expected_state_transitions = [
+        Transition(name="send", icon="icons/mail.svg", sort=0, meta={"url": "invoice_send", "icon": "icons/mail.svg"}),
+        Transition(name="void", icon="icons/invoice-void.svg", sort=0, meta={"icon": "icons/invoice-void.svg"}),
+    ]
     assert available_state_transitions == expected_state_transitions
 
 

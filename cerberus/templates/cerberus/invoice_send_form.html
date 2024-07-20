@@ -10,11 +10,26 @@
 
 {% block content %}
     {% if request.htmx %}
-        <dialog open id="confirmation-modal" x-data x-trap="true">
+        <dialog
+            open
+            id="confirmation-modal"
+            x-data
+            x-trap="true"
+            hx-on::after-request="document.getElementById('confirmation-modal').remove()"
+        >
             <article @click.outside="$root.remove()">
     {% endif %}
     <p>Are you sure you want to send {{ invoice }}?</p>
-    <form action="{% url 'invoice_action' invoice.pk 'send' %}" method="post" {{ form.attributes|attributes|safe }}>
+    <form
+        action="{% url 'invoice_action' invoice.pk 'send' %}{% if request.GET.mode %}?mode={{ request.GET.mode }}{% endif %}"
+        {% if request.GET.mode %}
+            hx-post="{% url 'invoice_action' invoice.pk 'send' %}?mode={{ request.GET.mode }}"
+            hx-target="#INV-{{ invoice.pk }}"
+            hx-swap="outerHTML"
+        {% endif %}
+        method="post"
+        {{ form.attributes|attributes|safe }}
+    >
         <p>
             {{ form|crispy }}
             {% csrf_token %}

@@ -3,6 +3,7 @@ import io
 import os
 from collections.abc import Callable, Iterable
 from datetime import date, timedelta
+from enum import Enum, auto
 from typing import TYPE_CHECKING
 
 # Django
@@ -29,6 +30,7 @@ from xhtml2pdf.context import pisaContext
 
 # Locals
 from ..decorators import save_after
+from ..model_utils import TransitionActionsMixin
 
 if TYPE_CHECKING:
     # Locals
@@ -49,7 +51,13 @@ class InvoiceManager(models.Manager["Invoice"]):
         )
 
 
-class Invoice(models.Model):
+class TransitionOrder(Enum):
+    send = auto()
+    pay = auto()
+    void = auto()
+
+
+class Invoice(models.Model, TransitionActionsMixin):
     charges: models.QuerySet["Charge"]
     payments: models.QuerySet["Payment"]
     get_available_state_transitions: Callable[[], Iterable[Transition]]
@@ -250,10 +258,6 @@ class Invoice(models.Model):
             super().delete(*args, **kwargs)
         else:
             self.void()
-
-    @property
-    def available_state_transitions(self) -> list[str]:
-        return [i.name for i in self.get_available_state_transitions()]
 
     @property
     def issued(self):

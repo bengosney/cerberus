@@ -12,11 +12,11 @@ class InvoiceForm(forms.ModelForm):
     class Meta:
         model = Invoice
         fields = [
+            "customer",
             "details",
             "due",
             "adjustment",
             "customer_name",
-            "sent_to",
             "invoice_address",
             "send_notes",
         ]
@@ -24,6 +24,12 @@ class InvoiceForm(forms.ModelForm):
             "adjustment": SingleMoneyWidget(),
             "due": forms.DateInput(attrs={"type": "date"}),
         }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        instance = getattr(self, "instance", None)
+        if instance and instance.pk:
+            self.fields["customer"].disabled = True
 
 
 class UninvoicedChargesForm(forms.Form):
@@ -35,7 +41,11 @@ class UninvoicedChargesForm(forms.Form):
 
 
 class CustomerUninvoicedChargesForm(forms.Form):
-    customer = forms.ModelChoiceField(queryset=Customer.objects.all(), widget=forms.HiddenInput, required=True)
+    customer = forms.ModelChoiceField(
+        queryset=Customer.objects.all(),
+        widget=forms.HiddenInput,
+        required=True,
+    )
     charges = forms.ModelMultipleChoiceField(
         queryset=Charge.objects.none(),
         widget=CheckboxTable(["name", "amount", "booking.date"]),
@@ -57,13 +67,23 @@ class CustomerUninvoicedChargesForm(forms.Form):
     def set_customer(self, customer_id: int | None) -> None:
         self.fields["customer"].initial = customer_id
         self.fields["charges"].queryset = Charge.objects.filter(
-            customer_id=customer_id, invoice__isnull=True
+            customer_id=customer_id,
+            invoice__isnull=True,
         ).prefetch_related("booking")
 
 
 class InvoiceSendForm(forms.Form):
     attributes = {"x-data": minimize_whitespace("""{ send: true }""")}
 
-    send_email = forms.BooleanField(required=False, widget=forms.CheckboxInput(attrs={"x-model.boolean.fill": "send"}))
-    to = forms.EmailField(required=True, widget=forms.EmailInput(attrs={":class": "{ 'display-none': ! send }"}))
-    send_notes = forms.CharField(required=False, widget=forms.Textarea(attrs={":class": "{ 'display-none': ! send }"}))
+    send_email = forms.BooleanField(
+        required=False,
+        widget=forms.CheckboxInput(attrs={"x-model.boolean.fill": "send"}),
+    )
+    to = forms.EmailField(
+        required=True,
+        widget=forms.EmailInput(attrs={":class": "{ 'display-none': ! send }"}),
+    )
+    send_notes = forms.CharField(
+        required=False,
+        widget=forms.Textarea(attrs={":class": "{ 'display-none': ! send }"}),
+    )

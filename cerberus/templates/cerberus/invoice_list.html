@@ -10,5 +10,11 @@
 
 
 {% block content %}
+  {% if not request.htmx %}
+    <div>
+      <a href="{% url 'invoiceable' %}">Invoiceable</a>
+    </div>
+  {% endif %}
   {% include 'cerberus/components/invoice_list.html' with invoices=object_list %}
+  {% include 'cerberus/components/add_invoice_fab.html' %}
 {% endblock %}

@@ -1,4 +1,6 @@
-import * as htmx from 'htmx.org';
+import htmx from 'htmx.org/dist/htmx.esm';
+import createRemoveExtension from '../htmx/remove';
+import createAutoTargetExtension from '../htmx/auto-target';
 
 declare global {
     interface Window {
@@ -7,3 +9,6 @@ declare global {
 }
 
 window.htmx = htmx;
+
+createRemoveExtension();
+createAutoTargetExtension();

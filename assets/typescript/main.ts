@@ -4,6 +4,7 @@ import './external/htmx';
 import { moveBooking } from './components/bookings';
 import { toast } from './components/toast';
 import { roundTime, addMinutes, dateToString } from './components/datetime';
+import { removeFormPrefix } from './components/utils';
 
 declare global {
     interface Window {
@@ -12,6 +13,7 @@ declare global {
         roundTime: typeof roundTime;
         addMinutes: typeof addMinutes;
         dateToString: typeof dateToString;
+        removeFormPrefix: typeof removeFormPrefix;
     }
 }
 
@@ -22,3 +24,4 @@ Window.toast = toast;
 Window.roundTime = roundTime;
 Window.addMinutes = addMinutes;
 Window.dateToString = dateToString;
+Window.removeFormPrefix = removeFormPrefix;

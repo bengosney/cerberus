@@ -7,5 +7,5 @@ register = template.Library()
 
 @register.simple_tag()
 def debug_object_dump(var):
-    if settings.DEBUG:
+    if getattr(settings, "DEBUG", False):
         return vars(var)

@@ -26,7 +26,7 @@ def make_aware(value: date, timezone=None):
 
 @lru_cache(maxsize=128)
 def minimize_whitespace(value: str) -> str:
-    if settings.DEBUG:
+    if getattr(settings, "DEBUG", False):
         return value
     return re.sub(r"(^\s+|[\n\r]+)", "", value, flags=re.MULTILINE).strip()
 

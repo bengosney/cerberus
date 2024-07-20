@@ -7,7 +7,6 @@ export const removeFormPrefix = (element: Element, count: number) => {
           if (attr_value !== null) {
             const new_attr_value = attr_value.replace('__prefix__', `${count}`);
             if (attr_value !== new_attr_value) {
-                console.log(attr_value, new_attr_value);
                 element.setAttribute(attr, new_attr_value);
             }
           }

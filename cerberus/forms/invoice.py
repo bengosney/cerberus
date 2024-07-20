@@ -69,7 +69,7 @@ class CustomerUninvoicedChargesForm(forms.Form):
         self.fields["charges"].queryset = Charge.objects.filter(
             customer_id=customer_id,
             invoice__isnull=True,
-        )
+        ).prefetch_related("booking")
 
 
 class InvoiceSendForm(forms.Form):

@@ -19,6 +19,7 @@ import reversion
 from django_fsm import FSMField, Transition, transition
 from djmoney.models.fields import MoneyField
 from humanize import naturaldate
+from zealot import zealot_ignore
 
 # Locals
 from ..decorators import save_after
@@ -41,6 +42,11 @@ class TransitionOrder(Enum):
     cancel = auto()
 
 
+class BookingSlotQuerySet(models.Manager):
+    def get_queryset(self):
+        return super().get_queryset().prefetch_related("bookings")
+
+
 class BookingSlot(models.Model):
     id: int
     bookings: models.QuerySet["Booking"]
@@ -54,6 +60,8 @@ class BookingSlot(models.Model):
         output_field=models.DurationField(),
         db_persist=True,
     )
+
+    objects = BookingSlotQuerySet()
 
     class Meta:
         unique_together = [("start", "end")]
@@ -108,7 +116,8 @@ class BookingSlot(models.Model):
 
     @property
     def can_move(self) -> bool:
-        return all(b.can_move for b in self.bookings.all())
+        with zealot_ignore():
+            return all(b.can_move for b in self.bookings.all())
 
     def move_slot(self, start: datetime | date, end: datetime | None = None) -> bool:
         if not self.can_move:

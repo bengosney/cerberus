@@ -1,0 +1,25 @@
+name: Update Changelog
+on:
+  push:
+    branches:
+      - main
+jobs:
+  updateChangelog:
+    runs-on: ubuntu-latest
+    if: "!startsWith(github.event.head_commit.message, 'bump:') && !startsWith(github.event.head_commit.author.username, 'dependabot')"
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Update Changelog
+        run: |
+          python3 -m pip install Commitizen
+          cz changelog
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v6
+        with:
+          commit-message: "docs(changelog): update changelog"
+          title: Update Changelog
+          body: Update changelog to reflect release changes
+          branch: update-changelog
+          base: main

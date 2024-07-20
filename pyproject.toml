@@ -8,7 +8,7 @@ requires = [
 
 [project]
 name = "cerberus"
-version = "0.1.0"
+version = "0.2.0"
 description = "Cerberus, the dog walkers CRM"
 readme = "README.rst"
 license = { file = "LICENSE" }
@@ -53,10 +53,12 @@ dependencies = [
   "wheel",
   "whitenoise",
   "xhtml2pdf",
+  "zealot",
 ]
 optional-dependencies.dev = [
   "black",
   "cogapp",
+  "commitizen",
   "django-browser-reload",
   "django-debug-toolbar",
   "django-debugtools",

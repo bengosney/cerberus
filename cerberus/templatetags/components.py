@@ -1,7 +1,7 @@
 # Standard Library
 import re
 from functools import lru_cache
-from typing import Any
+from typing import Any, TypeVar
 
 # Django
 from django import template
@@ -31,8 +31,13 @@ def parse_extra_context(extra_context: list[str]) -> dict[str, Any]:
     return {unquote(key): value for key, value in (item.split("=") for item in extra_context)}
 
 
-def nest_dict(d: dict) -> dict:
-    result = {}
+type RecursiveDict[ValueType] = dict[str, RecursiveDict[ValueType] | Any]
+
+T = TypeVar("T")
+
+
+def nest_dict(d: dict[str, T]) -> RecursiveDict[T]:
+    result: dict[str, Any] = {}
     for key, value in d.items():
         parts = key.split(".")
         current_dict = result

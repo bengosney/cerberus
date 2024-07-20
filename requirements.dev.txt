@@ -475,9 +475,7 @@ django-sqids==0.2.0 \
 django-stubs==5.0.2 \
     --hash=sha256:236bc5606e5607cb968f92b648471f9edaa461a774bc013bf9e6bff8730f6bdf \
     --hash=sha256:cb0c506cb5c54c64612e4a2ee8d6b913c6178560ec168009fe847c09747c304b
-    # via
-    #   cerberus (pyproject.toml)
-    #   djangorestframework-stubs
+    # via djangorestframework-stubs
 django-stubs-ext==5.0.2 \
     --hash=sha256:409c62585d7f996cef5c760e6e27ea3ff29f961c943747e67519c837422cad32 \
     --hash=sha256:8d8efec5a86241266bec94a528fe21258ad90d78c67307f3ae5f36e81de97f12
@@ -485,6 +483,10 @@ django-stubs-ext==5.0.2 \
 django-taggit==5.0.1 \
     --hash=sha256:a0ca8a28b03c4b26c2630fd762cb76ec39b5e41abf727a7b66f897a625c5e647 \
     --hash=sha256:edcd7db1e0f35c304e082a2f631ddac2e16ef5296029524eb792af7430cab4cc
+    # via cerberus (pyproject.toml)
+django-types==0.19.1 \
+    --hash=sha256:5ae7988612cf6fbc357b018bbc3b3a878b65e04275cc46e0d35d66a708daff12 \
+    --hash=sha256:b3f529de17f6374d41ca67232aa01330c531bbbaa3ac4097896f31ac33c96c30
     # via cerberus (pyproject.toml)
 django-vanilla-views==3.0.0 \
     --hash=sha256:ab49c4e410f00e04a89eff0403aa14f098c0ba251657deff7a2d5c3ebe23602f \
@@ -1293,9 +1295,9 @@ ruff==0.5.3 \
     --hash=sha256:e791d34d3557a3819b3704bc1f087293c821083fa206812842fa363f6018a192 \
     --hash=sha256:eafc45dd8bdc37a00b28e68cc038daf3ca8c233d73fea276dcd09defb1352841
     # via cerberus (pyproject.toml)
-setuptools==71.0.3 \
-    --hash=sha256:3d8531791a27056f4a38cd3e54084d8b1c4228ff9cf3f2d7dd075ec99f9fd70d \
-    --hash=sha256:f501b6e6db709818dc76882582d9c516bf3b67b948864c5fa1d1624c09a49207
+setuptools==71.0.4 \
+    --hash=sha256:48297e5d393a62b7cb2a10b8f76c63a73af933bd809c9e0d0d6352a1a0135dd8 \
+    --hash=sha256:ed2feca703be3bdbd94e6bb17365d91c6935c6b2a8d0bb09b66a2c435ba0b1a5
     # via
     #   django-money
     #   pip-tools
@@ -1343,6 +1345,10 @@ tomlkit==0.13.0 \
     --hash=sha256:08ad192699734149f5b97b45f1f18dad7eb1b6d16bc72ad0c2335772650d7b72 \
     --hash=sha256:7075d3042d03b80f603482d69bf0c8f345c2b30e41699fd8883227f89972b264
     # via commitizen
+types-psycopg2==2.9.21.20240417 \
+    --hash=sha256:05db256f4a459fb21a426b8e7fca0656c3539105ff0208eaf6bdaf406a387087 \
+    --hash=sha256:644d6644d64ebbe37203229b00771012fb3b3bddd507a129a2e136485990e4f8
+    # via django-types
 types-python-dateutil==2.9.0.20240316 \
     --hash=sha256:5d2f2e240b86905e40944dd787db6da9263f0deabef1076ddaed797351ec0202 \
     --hash=sha256:6b8cb66d960771ce5ff974e9dd45e38facb81718cc1e208b10b1baccbfdbee3b

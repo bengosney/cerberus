@@ -62,7 +62,7 @@ optional-dependencies.dev = [
   "django-browser-reload",
   "django-debug-toolbar",
   "django-debugtools",
-  "django-stubs",
+  "django-types",
   "djangorestframework-stubs",
   "faker",
   "freezegun",

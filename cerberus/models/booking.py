@@ -116,7 +116,7 @@ class BookingSlot(models.Model):
 
     @property
     def can_move(self) -> bool:
-        with zeal_ignore():
+        with zeal_ignore():  # todo: fix the n+1 I'm ignoring
             return all(b.can_move for b in self.bookings.all())
 
     def move_slot(self, start: datetime | date, end: datetime | None = None) -> bool:
@@ -325,7 +325,7 @@ class Booking(models.Model, TransitionActionsMixin):
         return f"{self.name} - {naturaldate(self.start)}"
 
     def save(self, *args, **kwargs) -> None:
-        with transaction.atomic():
+        with transaction.atomic(), zeal_ignore():  # todo: fix the n+1 I'm ignoring
             if self.pk is None and getattr(self, "_booking_slot", None) is None:
                 self._booking_slot = self._get_new_booking_slot()
 

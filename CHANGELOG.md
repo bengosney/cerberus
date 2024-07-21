@@ -1,5 +1,9 @@
 ## Unreleased
 
+### Fix
+
+- **n+1**: ignore some n+1 errors
+
 ### Refactor
 
 - **deps**: zelot has been renamed to zeal

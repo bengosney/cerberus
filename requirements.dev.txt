@@ -1410,9 +1410,9 @@ ruff==0.5.5 \
     --hash=sha256:f70737c157d7edf749bcb952d13854e8f745cec695a01bdc6e29c29c288fc36e \
     --hash=sha256:fe26fc46fa8c6e0ae3f47ddccfbb136253c831c3289bba044befe68f467bfb16
     # via cerberus (pyproject.toml)
-setuptools==71.1.0 \
-    --hash=sha256:032d42ee9fb536e33087fb66cac5f840eb9391ed05637b3f2a76a7c8fb477936 \
-    --hash=sha256:33874fdc59b3188304b2e7c80d9029097ea31627180896fb549c578ceb8a0855
+setuptools==72.1.0 \
+    --hash=sha256:5a03e1860cf56bb6ef48ce186b0e557fdba433237481a9a625176c2831be15d1 \
+    --hash=sha256:8d243eff56d095e5817f796ede6ae32941278f542e0f941867cc05ae52b162ec
     # via
     #   django-money
     #   pip-tools

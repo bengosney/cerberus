@@ -48,7 +48,7 @@ dependencies = [
   "markdown",
   "mjml-python",
   "psycopg2",
-  "python-bidi==0.5.*",
+  "python-bidi==0.6.*",
   "pytz",
   "reportlab==4.2.2",
   "uritemplate",

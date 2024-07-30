@@ -318,9 +318,9 @@ django-sqids==0.2.0 \
     --hash=sha256:fd3e727f0a8d8d50038c367bd1b0976e57678bb429bce9b1079d119a19e6791d \
     --hash=sha256:fe2620dd78c0de8f500e0ced2ee73d561abd07c93f9b3f396f0e17bf61f05368
     # via cerberus (pyproject.toml)
-django-taggit==5.0.1 \
-    --hash=sha256:a0ca8a28b03c4b26c2630fd762cb76ec39b5e41abf727a7b66f897a625c5e647 \
-    --hash=sha256:edcd7db1e0f35c304e082a2f631ddac2e16ef5296029524eb792af7430cab4cc
+django-taggit==6.0.0 \
+    --hash=sha256:7094f797b7e5e3727525a0af7bc550860000ddc2248266529d568eca61b39fb1 \
+    --hash=sha256:723d98bd5c536daa3c0e1bdae0965f7005a9b15269816bb4053fafec4ebad57e
     # via cerberus (pyproject.toml)
 django-vanilla-views==3.0.0 \
     --hash=sha256:ab49c4e410f00e04a89eff0403aa14f098c0ba251657deff7a2d5c3ebe23602f \

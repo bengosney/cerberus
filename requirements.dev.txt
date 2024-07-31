@@ -467,9 +467,9 @@ django-sqids==0.2.0 \
     --hash=sha256:fd3e727f0a8d8d50038c367bd1b0976e57678bb429bce9b1079d119a19e6791d \
     --hash=sha256:fe2620dd78c0de8f500e0ced2ee73d561abd07c93f9b3f396f0e17bf61f05368
     # via cerberus (pyproject.toml)
-django-stubs==5.0.2 \
-    --hash=sha256:236bc5606e5607cb968f92b648471f9edaa461a774bc013bf9e6bff8730f6bdf \
-    --hash=sha256:cb0c506cb5c54c64612e4a2ee8d6b913c6178560ec168009fe847c09747c304b
+django-stubs==5.0.4 \
+    --hash=sha256:78e3764488fdfd2695f12502136548ec22f8d4b1780541a835042b8238d11514 \
+    --hash=sha256:c2502f5ecbae50c68f9a86d52b5b2447d8648fd205036dad0ccb41e19a445927
     # via
     #   cerberus (pyproject.toml)
     #   djangorestframework-stubs

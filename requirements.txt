@@ -1002,9 +1002,9 @@ six==1.16.0 \
     # via
     #   html5lib
     #   python-bidi
-sqids==0.4.1 \
-    --hash=sha256:fe48319ae1a7ea4faca77920f454fcf2946bbca540a468a98d979ba490d195bd \
-    --hash=sha256:ffc3fbfef63491bee8b940a98065388345dbefb06d49e415b7a9e475ca200f9d
+sqids==0.5.0 \
+    --hash=sha256:4c2d1eabf4721e6e18001b1ff2bc0b30d059447ef96f1e1d1fb7f56841814154 \
+    --hash=sha256:647798e7d5bfeb236e7ac4709cfd4cd808630a6c50f80205df17b4c93e560140
     # via django-sqids
 sqlparse==0.5.1 \
     --hash=sha256:773dcbf9a5ab44a090f3441e2180efe2560220203dc2f8c0b0fa141e18b505e4 \

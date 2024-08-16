@@ -836,9 +836,9 @@ mjml-python==1.3.3 \
     --hash=sha256:99c34ce7138d2400ec889d5fc263add31a9b60ce9673790f4c6a2db4563b0dcb \
     --hash=sha256:c4fa9a4eca964889a3d3816750cba92a91abc852f17d8fd9cc3c63765abaf970
     # via cerberus (pyproject.toml)
-model-bakery==1.19.1 \
-    --hash=sha256:39b06d4ebad6972dd448f3c38ac938164a1b1b13d56bf98837ba011cb6622ddc \
-    --hash=sha256:9e9abe2ea8434e8cdb68b95be08df4f999bc7b4bc19c27fa4166283a947e14bd
+model-bakery==1.19.2 \
+    --hash=sha256:30bd89514bdca2eebd93f0596cacc7ac5c4f95a54a03befac6a90a70acfa8df3 \
+    --hash=sha256:a55c0c286da302748c4483db7b2f58fa32c79ccc530b68a7498a4d6675abd62b
     # via cerberus (pyproject.toml)
 mypy==1.11.1 \
     --hash=sha256:0624bdb940255d2dd24e829d99a13cfeb72e4e9031f9492148f410ed30bcab54 \

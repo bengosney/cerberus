@@ -47,6 +47,7 @@ dependencies = [
   "humanize",
   "markdown",
   "mjml-python",
+  "ortools",
   "psycopg2",
   "python-bidi==0.4.*",
   "pytz",

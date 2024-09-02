@@ -297,9 +297,9 @@ django-fsm==3.0.0 \
     # via
     #   django-fsm-admin2
     #   django-fsm-log
-django-fsm-2==3.0.0 \
-    --hash=sha256:19887dcd6009d9b785f6114527e6542f380c5af7061c47bebefcbad9ace730aa \
-    --hash=sha256:5ca98a4c1f5537a54433f3963cd8473dcdc039d9bc8c8045250d290f84a25b35
+django-fsm-2==4.0.0 \
+    --hash=sha256:622bea2f1bd52b3e85a70b7e9137a5f116ea9f42ba2f50a4609bde4035ac0092 \
+    --hash=sha256:e7cff1c192c2f8f7d46219d2681d2f2ae2def800373b477c81a98beb59c683bd
     # via cerberus (pyproject.toml)
 django-fsm-admin2==0.1.3 \
     --hash=sha256:01ad05c8a115783aab8c6a196adfde9ab58f513b00c62d180fcee57a8e9adaf3 \

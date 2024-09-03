@@ -341,8 +341,9 @@ django-vanilla-views==3.0.0 \
     --hash=sha256:ab49c4e410f00e04a89eff0403aa14f098c0ba251657deff7a2d5c3ebe23602f \
     --hash=sha256:b65f27b8d5de53f695a397438337be882a6c7b5d8d30333a4cf98c9239fe0b86
     # via cerberus (pyproject.toml)
-django-zeal==1.0.0 \
-    --hash=sha256:30c1b47ea714d0fe3cbf442a7bf9c0b2ce1796c441674a5714b9f51ba1d7b0bc
+django-zeal==1.4.0 \
+    --hash=sha256:27ac3348ff7263e5abf25df7ee5b8e577b05bf51296db2956e16928f8daf1bc2 \
+    --hash=sha256:b5f14eefa842ec9dad843a0bf81ada118daf1472f5728d4a4791a9d7a4cf5c95
     # via cerberus (pyproject.toml)
 djangorestframework==3.15.2 \
     --hash=sha256:2b8871b062ba1aefc2de01f773875441a961fefbf79f5eed1e32b2f096944b20 \

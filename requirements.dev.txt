@@ -535,9 +535,9 @@ djangorestframework-simplejwt==5.3.1 \
     --hash=sha256:381bc966aa46913905629d472cd72ad45faa265509764e20ffd440164c88d220 \
     --hash=sha256:6c4bd37537440bc439564ebf7d6085e74c5411485197073f508ebdfa34bc9fae
     # via cerberus (pyproject.toml)
-djangorestframework-stubs==3.15.0 \
-    --hash=sha256:6c634f16fe1f9b1654cfd921eca64cd4188ce8534ab5e3ec7e44aaa0ca969d93 \
-    --hash=sha256:f60ee1c80abb01a77acc0169969e07c45c2739ae64667b9a0dd4a2e32697dcab
+djangorestframework-stubs==3.15.1 \
+    --hash=sha256:34539871895d66d382b6ae3655d9f95c1de7733cf50bc29097638d367ed3117d \
+    --hash=sha256:79dc9018f5d5fa420f9981eec9f1e820ecbd04719791f144419cdc6c5b8e29bd
     # via cerberus (pyproject.toml)
 drf-spectacular==0.27.2 \
     --hash=sha256:a199492f2163c4101055075ebdbb037d59c6e0030692fc83a1a8c0fc65929981 \

@@ -1500,9 +1500,9 @@ types-python-dateutil==2.9.0.20240906 \
     --hash=sha256:27c8cc2d058ccb14946eebcaaa503088f4f6dbc4fb6093d3d456a49aef2753f6 \
     --hash=sha256:9706c3b68284c25adffc47319ecc7947e5bb86b3773f843c73906fd598bc176e
     # via cerberus (pyproject.toml)
-types-pyyaml==6.0.12.20240808 \
-    --hash=sha256:b8f76ddbd7f65440a8bda5526a9607e4c7a322dc2f8e1a8c405644f9a6f4b9af \
-    --hash=sha256:deda34c5c655265fc517b546c902aa6eed2ef8d3e921e4765fe606fe2afe8d35
+types-pyyaml==6.0.12.20240917 \
+    --hash=sha256:392b267f1c0fe6022952462bf5d6523f31e37f6cea49b14cee7ad634b6301570 \
+    --hash=sha256:d1405a86f9576682234ef83bcb4e6fff7c9305c8b1fbad5e0bcd4f7dbdc9c587
     # via
     #   django-stubs
     #   djangorestframework-stubs

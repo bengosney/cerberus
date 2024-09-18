@@ -990,9 +990,9 @@ pip-tools==7.4.1 \
     --hash=sha256:4c690e5fbae2f21e87843e89c26191f0d9454f362d8acdbd695716493ec8b3a9 \
     --hash=sha256:864826f5073864450e24dbeeb85ce3920cdfb09848a3d69ebf537b521f14bcc9
     # via cerberus (pyproject.toml)
-platformdirs==4.3.5 \
-    --hash=sha256:00d4e6d17a9a452c95182c20862bb655c8dc51122e2a3afbc0bc7cfb7538b263 \
-    --hash=sha256:227a0d45c85fc7a4a2147af40dab1ee3657f4b92e725e2cbc707949bfab78be3
+platformdirs==4.3.6 \
+    --hash=sha256:357fb2acbc885b0419afd3ce3ed34564c13c9b95c89360cd9563f73aa5e2b907 \
+    --hash=sha256:73e575e1408ab8103900836b97580d5307456908a03e92031bab39e4554cc3fb
     # via
     #   black
     #   virtualenv

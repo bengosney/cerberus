@@ -508,9 +508,9 @@ django-stubs==5.0.4 \
     # via
     #   cerberus (pyproject.toml)
     #   djangorestframework-stubs
-django-stubs-ext==5.0.4 \
-    --hash=sha256:85da065224204774208be29c7d02b4482d5a69218a728465c2fbe41725fdc819 \
-    --hash=sha256:910cbaff3d1e8e806a5c27d5ddd4088535aae8371ea921b7fd680fdfa5f14e30
+django-stubs-ext==5.1.0 \
+    --hash=sha256:a455fc222c90b30b29ad8c53319559f5b54a99b4197205ddbb385aede03b395d \
+    --hash=sha256:ed7d51c0b731651879fc75f331fb0806d98b67bfab464e96e2724db6b46ef926
     # via django-stubs
 django-taggit==6.0.0 \
     --hash=sha256:7094f797b7e5e3727525a0af7bc550860000ddc2248266529d568eca61b39fb1 \

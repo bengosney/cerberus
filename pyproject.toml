@@ -50,7 +50,7 @@ dependencies = [
   "psycopg2",
   "python-bidi==0.6.*",
   "pytz",
-  "reportlab==4.2.2",
+  "reportlab==4.2.4",
   "uritemplate",
   "wheel",
   "whitenoise",

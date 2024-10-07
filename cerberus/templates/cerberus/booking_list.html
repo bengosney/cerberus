@@ -1,16 +1,13 @@
 {% extends 'base.html' %}
 
-
-
 {% block page_title %}Bookings{% endblock %}
 
 {% block subtitle %}
   <h2>Bookings</h2>
-{% endblock %}
-
+{% endblock subtitle %}
 
 {% block content %}
-  {% if not request.htmx %}<a href="{% url 'booking_calender_month'%}">Calender View</a>{% endif %}
+  {% if not request.htmx %}<a href="{% url 'booking_calender_month' %}">Calender View</a>{% endif %}
   {% include 'cerberus/components/booking_list.html' with bookings=object_list %}
   {% include 'cerberus/components/add_booking_fab.html' %}
-{% endblock %}
+{% endblock content %}

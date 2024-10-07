@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
 
-{% load humanize human_duration %}
-{% load field_tags components %}
+{% load components field_tags human_duration humanize %}
 
 {% block page_title %}{{ object.name }} | Service{% endblock %}
 
@@ -25,4 +24,4 @@
         <div>Created</div><div>{% natural_time service.created %}</div>
         <div>Last Updated</div><div>{% natural_time service.last_updated %}</div>
     </div>
-{% endblock %}
+{% endblock content %}

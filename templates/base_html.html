@@ -1,5 +1,4 @@
-{% load static %}
-{% load django_htmx %}
+{% load django_htmx static %}
 
 <!doctype html>
 <html data-theme="dark">
@@ -20,7 +19,7 @@
           <h1>Cerberus</h1>
           {% block breadcrumbs %}
             {% include 'utils/breadcrumbs.html' with breadcrumbs=breadcrumbs %}
-          {% endblock %}
+          {% endblock breadcrumbs %}
         </hgroup>
       </header>
       <main>
@@ -30,7 +29,7 @@
         <hr />
         <small>&copy; Cerberus {% now "Y" %}</small>
       </footer>
-    {% endblock %}
+    {% endblock body %}
 
     {% django_htmx_script %}
   </body>

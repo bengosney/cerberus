@@ -1,17 +1,14 @@
 {% extends 'base.html' %}
 
-
-
 {% block page_title %}Pets{% endblock %}
 
 {% block subtitle %}
   <h2>Pets</h2>
-{% endblock %}
-
+{% endblock subtitle %}
 
 {% block content %}
   {% include 'cerberus/components/pet_list.html' with pets=object_list %}
-{% endblock %}
+{% endblock content %}
 
 06:45
 07:00

@@ -11,7 +11,7 @@
             :max="parseInt(stop) - 1"
             x-on:change="start = start && stop ? Math.min(start, parseInt(stop) - 1) : start"
             name="{{ widget.name }}"
-            {% include "django/forms/widgets/attrs.html"  %}
+            {% include "django/forms/widgets/attrs.html" %}
         />
     {% endwith %}
     <span>-</span>
@@ -22,7 +22,7 @@
             :min="parseInt(start) + 1"
             x-on:change="stop = start && stop ? Math.max(parseInt(start) + 1, stop) : stop"
             name="{{ widget.name }}"
-            {% include "django/forms/widgets/attrs.html"  %}
+            {% include "django/forms/widgets/attrs.html" %}
         />
     {% endwith %}
 </div>

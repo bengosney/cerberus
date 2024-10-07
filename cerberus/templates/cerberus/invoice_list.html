@@ -1,13 +1,10 @@
 {% extends 'base.html' %}
 
-
-
 {% block page_title %}Invoices{% endblock %}
 
 {% block subtitle %}
   <h2>Invoices</h2>
-{% endblock %}
-
+{% endblock subtitle %}
 
 {% block content %}
   {% if not request.htmx %}
@@ -17,4 +14,4 @@
   {% endif %}
   {% include 'cerberus/components/invoice_list.html' with invoices=object_list %}
   {% include 'cerberus/components/add_invoice_fab.html' %}
-{% endblock %}
+{% endblock content %}

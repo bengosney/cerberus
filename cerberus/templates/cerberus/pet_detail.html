@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
 
-{% load humanize %}
-{% load field_tags components %}
+{% load components field_tags humanize %}
 
 {% block page_title %}Pet {{ object.name }}{% endblock %}
 
@@ -31,4 +30,4 @@
         <div>Allergies</div><div>{{ pet.allergies|default:"-" }}</div>
         <div>Tags</div><div>{{ pet.tags.names|join:", " }}</div>
     </div>
-{% endblock %}
+{% endblock content %}

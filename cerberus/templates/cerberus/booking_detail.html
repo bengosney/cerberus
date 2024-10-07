@@ -1,9 +1,6 @@
 {% extends 'base.html' %}
 
-{% load humanize %}
-{% load field_tags components %}
-{% load djmoney %}
-{% load human_duration %}
+{% load components djmoney field_tags human_duration humanize %}
 
 {% block page_title %}Booking {{ object.name }}{% endblock %}
 
@@ -39,4 +36,4 @@
             {% endfor %}
         </div>
     </div>
-{% endblock %}
+{% endblock content %}

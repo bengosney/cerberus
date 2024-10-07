@@ -6,7 +6,7 @@
 
 {% block page_title %}
     {% include 'utils/page_title.html' with object_name=view.model|verbose_name|capfirst %}
-{% endblock %}
+{% endblock page_title %}
 
 {% block content %}
     {% if request.htmx %}
@@ -52,4 +52,4 @@
         </article>
         </dialog>
     {% endif %}
-{% endblock %}
+{% endblock content %}

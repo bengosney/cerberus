@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% load field_tags components string_utils %}
+{% load components field_tags string_utils %}
 
 {% block page_title %}Invoice {{ invoice.name }}{% endblock %}
 
@@ -86,4 +86,4 @@
             {% endfor %}
         </tbody>
     </table>
-{% endblock %}
+{% endblock content %}

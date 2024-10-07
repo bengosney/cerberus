@@ -3,7 +3,7 @@
 
 <{% if tag %}{{ tag }}{% else %}div{% endif %}
 id="div_{{ field.auto_id }}"
-class="checkbox-dropdown checkbox{% if wrapper_class %} {{ wrapper_class }}{% endif %}{% if form_show_errors%}{% if field.errors %} has-error{% endif %}{% endif %}{% if field.css_classes %} {{ field.css_classes }}{% endif %}"
+class="checkbox-dropdown checkbox{% if wrapper_class %} {{ wrapper_class }}{% endif %}{% if form_show_errors %}{% if field.errors %} has-error{% endif %}{% endif %}{% if field.css_classes %} {{ field.css_classes }}{% endif %}"
 x-data="{{# fmt:off #}
   open: false,
   toggle() { $nextTick(() => this.open = ! this.open) },

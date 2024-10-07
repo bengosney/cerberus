@@ -1,5 +1,4 @@
-{% load paginator_tags %}
-{% load crispy_forms_tags %}
+{% load crispy_forms_tags paginator_tags %}
 
 {% page_range paginator page_obj.number as pages %}
 {% if paginator.num_pages > 1 %}

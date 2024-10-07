@@ -3,9 +3,9 @@
 
 
 {% if not request.htmx %}
-    {% block page_title %}Send {{ object.name }}?{% endblock %}
+{% block page_title %}Send {{ object.name }}?{% endblock %}
 {% endif %}
 
 {% block content %}
     {% include "utils/confirmation_modal.html" with question='send' action='invoice_email' cancel='invoice_detail' %}
-{% endblock %}
+{% endblock content %}

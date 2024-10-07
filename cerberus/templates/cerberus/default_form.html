@@ -1,11 +1,10 @@
 {% extends 'base.html' %}
 
-{% load crispy_forms_tags %}
-{% load field_tags %}
+{% load crispy_forms_tags field_tags %}
 
 {% block page_title %}
     {% include 'utils/page_title.html' with object_name=view.model|verbose_name|capfirst %}
-{% endblock %}
+{% endblock page_title %}
 
 {% block content %}
     {% if object.pk is None %}
@@ -19,4 +18,4 @@
         {% csrf_token %}
         <input type="submit" class="button" value="Save">
     </form>
-{% endblock %}
+{% endblock content %}

@@ -1,7 +1,7 @@
 exclude: migrations/.*\.py|Procfile|[aw]sgi\.py|node_modules|.git|\.polar|inputs/.*
 repos:
 - repo: https://github.com/adamchainz/django-upgrade
-  rev: 1.19.0
+  rev: 1.21.0
   hooks:
   - id: django-upgrade
     args: [--target-version, '5.0']
@@ -10,7 +10,7 @@ repos:
   hooks:
   - id: relativize-imports
 - repo: https://github.com/pre-commit/pre-commit-hooks
-  rev: v4.6.0
+  rev: v5.0.0
   hooks:
   - id: trailing-whitespace
   - id: end-of-file-fixer
@@ -24,13 +24,8 @@ repos:
     files: requirements.*\.in
   - id: mixed-line-ending
     args: [--fix, lf]
-- repo: https://github.com/myint/docformatter
-  rev: v1.7.5
-  hooks:
-  - id: docformatter
-    args: [--in-place]
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: v0.5.1
+  rev: v0.6.9
   hooks:
   - id: ruff
     args: [--fix]
@@ -40,7 +35,7 @@ repos:
   hooks:
   - id: isort
 - repo: https://github.com/macisamuele/language-formatters-pre-commit-hooks
-  rev: v2.13.0
+  rev: v2.14.0
   hooks:
   - id: pretty-format-yaml
     args: [--autofix]
@@ -54,19 +49,20 @@ repos:
   - id: prettier
     types_or: [css, javascript]
     exclude: .min.
-- repo: https://github.com/rtts/djhtml
-  rev: 3.0.6
+- repo: https://github.com/adamchainz/djade-pre-commit
+  rev: 1.2.0
   hooks:
-  - id: djhtml
+  - id: djade
+    args: [--target-version, '5.1']
 - repo: https://github.com/tox-dev/pyproject-fmt
-  rev: 2.1.4
+  rev: 2.2.4
   hooks:
   - id: pyproject-fmt
 - repo: https://github.com/rstcheck/rstcheck
-  rev: v6.2.0
+  rev: v6.2.4
   hooks:
   - id: rstcheck
 - repo: https://github.com/commitizen-tools/commitizen
-  rev: v3.27.0
+  rev: v3.29.1
   hooks:
   - id: commitizen

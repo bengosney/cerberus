@@ -13,11 +13,11 @@ TS_FILES:=$(shell find assets/typescript -name *.ts)
 JS_FILES:=$(patsubst assets/typescript/%.ts,cerberus_crm/static/js/%.min.js,$(wildcard assets/typescript/*.ts))
 
 PYTHON_VERSION:=$(shell python --version | cut -d " " -f 2)
-PIP_PATH:=.direnv/python-$(PYTHON_VERSION)/bin/pip
-WHEEL_PATH:=.direnv/python-$(PYTHON_VERSION)/bin/wheel
-PRE_COMMIT_PATH:=.direnv/python-$(PYTHON_VERSION)/bin/pre-commit
-UV_PATH:=.direnv/python-$(PYTHON_VERSION)/bin/uv
-COG_PATH:=.direnv/python-$(PYTHON_VERSION)/bin/cog
+PIP_PATH:=.venv/bin/pip
+WHEEL_PATH:=.venv/bin/wheel
+PRE_COMMIT_PATH:=.venv/bin/pre-commit
+UV_PATH:=.venv/bin/uv
+COG_PATH:=.venv/bin/cog
 COGABLE_FILES:=$(shell find assets -maxdepth 4 -type f -exec grep -l "\[\[\[cog" {} \;)
 MIGRATION_FILES:=$(shell ls -d -- **/migrations/*.py)
 ESBUILD_PATH:=./node_modules/.bin/esbuild
@@ -48,21 +48,10 @@ requirements.txt: $(UV_PATH) pyproject.toml
 	@echo "Builing $@"
 	python -m uv pip compile --generate-hashes $(filter-out $<,$^) > $@
 
-.direnv: .envrc $(UV_PATH) requirements.txt $(REQS)
-	@echo "Installing $(filter-out $<,$^)"
-	python -m uv pip sync requirements.txt $(REQS)
-	@touch $@
-
 .git/hooks/pre-commit: .git $(PRE_COMMIT_PATH) .pre-commit-config.yaml
 	pre-commit install
 
-.envrc:
-	@echo "Setting up .envrc then stopping"
-	@echo "layout python python3.12" > $@
-	@touch -d '+1 minute' $@
-	@false
-
-$(PIP_PATH): .envrc
+$(PIP_PATH):
 	@python -m ensurepip
 	@python -m pip install --upgrade pip
 
@@ -75,8 +64,9 @@ $(UV_PATH): $(PIP_PATH) $(WHEEL_PATH)
 $(PRE_COMMIT_PATH): $(PIP_PATH) $(WHEEL_PATH)
 	@python -m pip install pre-commit
 
-init: .envrc $(UV_PATH) requirements.dev.txt .direnv .git/hooks/pre-commit ## Initalise a enviroment
+init: $(UV_PATH) requirements.dev.txt .venv .git/hooks/pre-commit ## Initalise a enviroment
 	@python -m pip install --upgrade pip
+	$(MAKE) install
 
 clean: ## Remove all build files
 	find . -name '*.pyc' -delete
@@ -107,7 +97,7 @@ _upgrade: $(UV_PATH) requirements.txt
 	@python -m pip install --upgrade pip
 	@python -m uv pip compile -q --upgrade -o requirements.txt pyproject.toml
 
-upgrade: _upgrade $(PRE_COMMIT_PATH) .direnv  ## Upgrade the project requirements
+upgrade: _upgrade $(PRE_COMMIT_PATH) .venv  ## Upgrade the project requirements
 	python -m pre_commit autoupdate
 
 $(ESBUILD_PATH): node_modules
@@ -128,17 +118,17 @@ $(COGABLE_FILES): .FORCE
 
 cog: $(COG_PATH) $(COG_FILE) $(COGABLE_FILES) ## Run cog
 
-db.sqlite3: .direnv $(MIGRATION_FILES)
+db.sqlite3: .venv $(MIGRATION_FILES)
 	python manage.py migrate
 	@touch $@
 
-dev: .direnv db.sqlite3 cog css js ## Setup the project read for development
+dev: .venv db.sqlite3 cog css js ## Setup the project read for development
 
 node_modules: package.json package-lock.json
 	npm install
 	@touch $@
 
-lcov.info: .direnv cerberus/tests/test_*.py
+lcov.info: .venv cerberus/tests/test_*.py
 	pytest --cov --cov-report=lcov:$@
 
 coverage: lcov.info

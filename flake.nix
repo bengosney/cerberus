@@ -17,7 +17,7 @@
             pkgs.nodePackages.typescript
             pkgs.nodePackages.typescript-language-server
 
-            pkgs.python312
+            pkgs.python313
             pkgs.python3Packages.venvShellHook
           ];
 
@@ -32,6 +32,25 @@
             SOURCE_DATE_EPOCH=$(date +%s)
             make install
           '';
+        };
+      });
+
+      packages = eachSystem (pkgs: {
+        default = pkgs.python313;
+      });
+
+      defaultPackage = eachSystem (pkgs: {
+        default = pkgs.python313;
+      });
+
+      docker = eachSystem (pkgs: pkgs.dockerTools.buildLayeredImage {
+        name = "cerberus";
+        tag = "latest";
+        contents = [
+          pkgs.python313
+        ];
+        config = {
+          Cmd = [ "python" ];
         };
       });
     };

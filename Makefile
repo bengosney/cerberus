@@ -34,7 +34,7 @@ help: ## Display this help
 .git: .gitignore
 	git init
 
-.pre-commit-config.yaml: $(PRE_COMMIT_PATH) .git
+.pre-commit-config.yaml: | $(PRE_COMMIT_PATH) .git
 	curl https://gist.githubusercontent.com/bengosney/4b1f1ab7012380f7e9b9d1d668626143/raw/.pre-commit-config.yaml > $@
 	pre-commit autoupdate
 	@touch $@

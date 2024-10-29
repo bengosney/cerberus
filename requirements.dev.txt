@@ -420,9 +420,9 @@ django-appconf==1.0.6 \
     --hash=sha256:c3ae442fba1ff7ec830412c5184b17169a7a1e71cf0864a4c3f93cf4c98a1993 \
     --hash=sha256:cfe87ea827c4ee04b9a70fab90b86d704cb02f2981f89da8423cb0fabf88efbf
     # via django-fsm-log
-django-browser-reload==1.15.0 \
-    --hash=sha256:55b72335568b988e3a2beddb1703db6951516355925d3fc9c587f0bbd9e8efaa \
-    --hash=sha256:ed094386c587a95ff4f34a0d302ecd58f15e919784c4c76a97f7cb977446104c
+django-browser-reload==1.17.0 \
+    --hash=sha256:3667939cde0eee1a6d698dbe3b78cf10b573dabc4e711fb7933f1ba91fb98da4 \
+    --hash=sha256:d372c12c1c5962c02279a53cac7e8a020c48f104592c637a06d0768b28d2d6be
     # via cerberus (pyproject.toml)
 django-cors-headers==4.4.0 \
     --hash=sha256:5c6e3b7fe870876a1efdfeb4f433782c3524078fa0dc9e0195f6706ce7a242f6 \

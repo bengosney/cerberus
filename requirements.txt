@@ -1047,9 +1047,9 @@ wheel==0.43.0 \
     --hash=sha256:465ef92c69fa5c5da2d1cf8ac40559a8c940886afcef87dcf14b9470862f1d85 \
     --hash=sha256:55c570405f142630c6b9f72fe09d9b67cf1477fcf543ae5b8dcb1f5b7377da81
     # via cerberus (pyproject.toml)
-whitenoise==6.8.1 \
-    --hash=sha256:11042f39f1dcfbb3814726b9364703af6901706582d988e96494cfefdc3a89e2 \
-    --hash=sha256:196ba04ca0a80f4a3f99f88381864f218a28b5fb5b44d29feea484d501fa0ba3
+whitenoise==6.8.2 \
+    --hash=sha256:486bd7267a375fa9650b136daaec156ac572971acc8bf99add90817a530dd1d4 \
+    --hash=sha256:df12dce147a043d1956d81d288c6f0044147c6d2ab9726e5772ac50fb45d2280
     # via cerberus (pyproject.toml)
 xhtml2pdf==0.2.16 \
     --hash=sha256:7391adac12afb086561667cdc8d6ef0ac4afe5097bd97383622d42b6343dee71 \

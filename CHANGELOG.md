@@ -2,6 +2,7 @@
 
 ### Fix
 
+- **migration**: add missing migration
 - **n+1**: ignore some n+1 errors
 
 ### Refactor

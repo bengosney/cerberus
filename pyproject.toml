@@ -19,6 +19,7 @@ requires-python = ">=3.12"
 classifiers = [
   "Programming Language :: Python :: 3 :: Only",
   "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
 ]
 dependencies = [
   "crispy-bulma",
@@ -118,7 +119,6 @@ lint.isort.section-order = [
 
 lint.isort.sections.django = [ "django" ]
 lint.isort.sections.wagtail = [ "wagtail" ]
-
 
 [tool.coverage.run]
 source = [

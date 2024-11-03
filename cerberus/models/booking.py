@@ -520,3 +520,12 @@ class Booking(models.Model, TransitionActionsMixin):
 
 class BookingCharge(Charge):
     booking = models.ForeignKey(Booking, on_delete=models.PROTECT, related_name="charges")
+
+
+class BookingRecurrence(models.Model):
+    booking = models.ForeignKey(Booking, on_delete=models.PROTECT, related_name="recurrences")
+    start = models.DateTimeField()
+    end = models.DateTimeField()
+    interval = models.DurationField()
+    count = models.PositiveIntegerField()
+    until = models.DateTimeField()

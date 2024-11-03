@@ -98,20 +98,27 @@ cerberus = [
 [tool.ruff]
 target-version = "py312"
 line-length = 120
-exclude = [
-  "migrations",
+exclude = [ "migrations" ]
+
+format.indent-style = "space"
+format.quote-style = "double"
+format.docstring-code-format = true
+
+lint.select = [ "C90", "DJ", "E", "ERA", "F", "FURB", "I", "N", "PERF", "PL", "RUF", "TRY", "UP" ]
+
+lint.isort.section-order = [
+  "future",
+  "standard-library",
+  "third-party",
+  "django",
+  "wagtail",
+  "first-party",
+  "local-folder",
 ]
 
-lint.select = [
-  "C90",
-  "DJ",
-  "E4",
-  "E7",
-  "E9",
-  "F",
-  "N",
-  "UP",
-]
+lint.isort.sections.django = [ "django" ]
+lint.isort.sections.wagtail = [ "wagtail" ]
+
 
 [tool.coverage.run]
 source = [

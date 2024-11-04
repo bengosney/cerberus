@@ -1,15 +1,11 @@
-# Standard Library
 from typing import Self
 
-# Django
+from vanilla import CreateView, DetailView, ListView
+
 from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse_lazy
 
-# Third Party
-from vanilla import CreateView, DetailView, ListView
-
-# Locals
 from ..filters import CustomerFilter
 from ..forms import ContactForm, CustomerForm, CustomerUninvoicedChargesForm
 from ..models import Contact, Customer
@@ -61,9 +57,11 @@ class CustomerCRUD(CRUDViews):
             {
                 "form": form,
                 "customer": customer,
-                "breadcrumbs": self.get_breadcrumbs(customer)
-                + [
-                    Crumb("Uninvoiced Charges", reverse_lazy("customer_uninvoiced_charges", kwargs={"pk": customer.pk}))
+                "breadcrumbs": [
+                    *self.get_breadcrumbs(customer),
+                    Crumb(
+                        "Uninvoiced Charges", reverse_lazy("customer_uninvoiced_charges", kwargs={"pk": customer.pk})
+                    ),
                 ],
             },
         )

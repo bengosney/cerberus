@@ -1,13 +1,10 @@
-# Django
+from rest_framework.response import Response
+from rest_framework.views import APIView
+
 from django.db.models import Count, F, Sum
 from django.db.models.functions import ExtractWeek, ExtractYear
 from django.urls import path
 
-# Third Party
-from rest_framework.response import Response
-from rest_framework.views import APIView
-
-# Locals
 from .models import Invoice
 
 

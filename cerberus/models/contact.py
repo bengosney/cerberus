@@ -1,16 +1,12 @@
-# Standard Library
 import re
 from enum import Enum
 
-# Django
+import reversion
+
 from django.db import models
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 
-# Third Party
-import reversion
-
-# Locals
 from ..exceptions import InvalidEmailError
 
 
@@ -67,7 +63,7 @@ class Contact(models.Model):
 
     def set_as_invoice(self):
         if self.type != self.Type.EMAIL:
-            raise InvalidEmailError("Can only set email as invoice email")
+            raise InvalidEmailError()
 
         self.customer.invoice_email = self.details
         return self.customer.save()

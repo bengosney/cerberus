@@ -1,7 +1,5 @@
-# Standard Library
 import calendar
 
-# Django
 from django import template
 
 register = template.Library()

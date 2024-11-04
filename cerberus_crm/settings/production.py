@@ -1,11 +1,8 @@
-# Standard Library
 import contextlib
 import os
 
-# Third Party
 import dj_database_url
 
-# Locals
 from .base import *  # noqa
 from .base import DATABASES, MIDDLEWARE
 

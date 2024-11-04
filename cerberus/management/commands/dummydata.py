@@ -1,17 +1,13 @@
-# Standard Library
 import random
 import re
 from datetime import datetime, timedelta
 
-# Django
+from faker import Faker
+
 from django.core.management.base import BaseCommand
 from django.db import IntegrityError
 from django.db.models import QuerySet
 
-# Third Party
-from faker import Faker
-
-# Locals
 from ...models import Charge, Contact, Customer, Invoice, Pet, Service, Vet
 from ...utils import make_aware
 
@@ -183,5 +179,5 @@ class Command(BaseCommand):
                         if stage >= 1:
                             invoice.send(send_email=False)
 
-                        if stage >= 2:
+                        if stage >= 2:  # noqa: PLR2004
                             invoice.pay()

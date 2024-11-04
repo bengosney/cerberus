@@ -1,12 +1,7 @@
-# Standard Library
 from collections.abc import Callable, Iterable
 from decimal import Decimal
 from typing import TYPE_CHECKING, Self
 
-# Django
-from django.db import models
-
-# Third Party
 import reversion
 from django_fsm import FSMField, Transition, transition
 from djmoney.models.fields import MoneyField
@@ -15,9 +10,10 @@ from moneyed import Money
 from polymorphic.models import PolymorphicModel
 from polymorphic.query import PolymorphicQuerySet
 
-# Locals
+from django.db import models
+
 from ..decorators import save_after
-from ..exceptions import ChargeRefundError
+from ..exceptions import ChargeAllreadyRefundedError, RefundAmountExceedsError
 
 if TYPE_CHECKING:
     # Locals
@@ -84,7 +80,7 @@ class Charge(PolymorphicModel):
         related_name="charges",
     )
 
-    objects = ChargeQuerySet.as_manager()
+    objects = ChargeQuerySet.as_manager()  # type: ignore
 
     class Meta:
         ordering = ("created",)
@@ -115,7 +111,7 @@ class Charge(PolymorphicModel):
         refunded = sum((refund.amount for refund in self.get_refunds()), Money(0, self.amount_currency))
 
         if refunded >= self.amount:
-            raise ChargeRefundError("Charge has already been refunded in full")
+            raise ChargeAllreadyRefundedError()
 
         refundable = self.amount - (-refunded)
         amount = amount or refundable
@@ -123,7 +119,7 @@ class Charge(PolymorphicModel):
             amount = Money(amount, self.amount_currency)
 
         if amount > refundable:
-            raise ChargeRefundError("Refund amount exceeds the refundable amount")
+            raise RefundAmountExceedsError()
 
         return self.__class__.objects.create(
             name=f"{self.name} - Refund",

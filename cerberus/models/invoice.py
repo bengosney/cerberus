@@ -1,4 +1,3 @@
-# Standard Library
 import io
 import os
 from collections.abc import Callable, Iterable
@@ -6,18 +5,6 @@ from datetime import date, timedelta
 from enum import Enum, auto
 from typing import TYPE_CHECKING
 
-# Django
-from django.conf import settings
-from django.contrib.staticfiles import finders
-from django.core.mail import EmailMultiAlternatives
-from django.db import models
-from django.db.models import Case, F, IntegerField, Q, Sum, Value, When
-from django.http import HttpResponse
-from django.template import loader
-from django.template.loader import get_template
-from django.urls import reverse
-
-# Third Party
 from django_fsm import FSMField, Transition, transition
 from django_fsm_log.models import StateLog
 from djmoney.models.fields import MoneyField
@@ -28,7 +15,16 @@ from moneyed import Money
 from xhtml2pdf import pisa
 from xhtml2pdf.context import pisaContext
 
-# Locals
+from django.conf import settings
+from django.contrib.staticfiles import finders
+from django.core.mail import EmailMultiAlternatives
+from django.db import models
+from django.db.models import Case, CheckConstraint, F, IntegerField, Q, Sum, Value, When
+from django.http import HttpResponse
+from django.template import loader
+from django.template.loader import get_template
+from django.urls import reverse
+
 from ..decorators import save_after
 from ..model_utils import TransitionActionsMixin
 
@@ -161,7 +157,7 @@ class Invoice(models.Model, TransitionActionsMixin):
         }
         created_log = StateLog(**created)
 
-        return [created_log] + list(StateLog.objects.for_(self))  # type: ignore
+        return [created_log, *list(StateLog.objects.for_(self))]  # type: ignore
 
     @save_after
     @transition(
@@ -382,7 +378,7 @@ class Payment(models.Model):
 
     class Meta:
         constraints = [
-            models.CheckConstraint(name="%(app_label)s_%(class)s_gte_0", check=models.Q(amount__gte=0)),
+            CheckConstraint(name="%(app_label)s_%(class)s_gte_0", check=models.Q(amount__gte=0)),
         ]
 
     def __str__(self) -> str:

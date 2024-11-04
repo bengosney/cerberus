@@ -1,14 +1,11 @@
-# Django
-from django.db.models import GeneratedField
-
-# Third Party
 import pytest
 from hypothesis import given
 from hypothesis.extra.django import from_model, register_field_strategy
 from hypothesis.strategies import just
 from model_bakery import baker
 
-# Locals
+from django.db.models import GeneratedField
+
 from ..models import Address, Contact, Customer, Pet
 from ..serializers import ContactSerializer, CustomerSerializer
 

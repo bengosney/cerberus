@@ -1,10 +1,10 @@
-# Standard Library
 import datetime as dt
 from calendar import MONDAY, Calendar, month_name
 from collections import defaultdict, namedtuple
 from collections.abc import Iterable
 
-# Django
+from vanilla import FormView, ListView
+
 from django.contrib.humanize.templatetags import humanize
 from django.db import transaction
 from django.db.models import Count
@@ -13,10 +13,6 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import RedirectView, TemplateView
 
-# Third Party
-from vanilla import FormView, ListView
-
-# Locals
 from ..filters import BookingFilter
 from ..forms import BookingForm, CompletableBookingForm
 from ..models import Booking

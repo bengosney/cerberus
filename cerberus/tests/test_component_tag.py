@@ -1,10 +1,8 @@
-# Django
-from django.template import Context, Template
-from django.template.engine import Engine
-
-# Third Party
 import pytest
 from pytest_django.asserts import assertHTMLEqual
+
+from django.template import Context, Template
+from django.template.engine import Engine
 
 
 @pytest.fixture

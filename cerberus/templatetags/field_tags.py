@@ -1,4 +1,3 @@
-# Django
 from django import template
 from django.db.models import Model
 from django.utils.text import capfirst

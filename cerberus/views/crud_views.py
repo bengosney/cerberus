@@ -1,10 +1,11 @@
-# Standard Library
 from collections import namedtuple
 from collections.abc import Iterable
 from enum import Enum
 from typing import Any, Protocol
 
-# Django
+from django_filters import FilterSet
+from vanilla import CreateView, DeleteView, DetailView, GenericModelView, ListView, UpdateView
+
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import ValidationError
@@ -12,10 +13,6 @@ from django.db import transaction
 from django.db.models import Model
 from django.urls import path, reverse_lazy
 from django.urls.resolvers import URLPattern
-
-# Third Party
-from django_filters import FilterSet
-from vanilla import CreateView, DeleteView, DetailView, GenericModelView, ListView, UpdateView
 
 
 class Actions(Enum):
@@ -78,7 +75,7 @@ class SortableFieldError(Exception):
 
 
 class SortableViewMixin(GenericModelView):
-    sortable_fields: list[str] = []
+    sortable_fields = []
 
     def get_queryset(self):
         queryset = super().get_queryset()
@@ -112,7 +109,7 @@ class SortableViewMixin(GenericModelView):
 
 
 class BreadcrumbMixin(GenericModelView):
-    def get_breadcrumbs(self):
+    def get_breadcrumbs(self):  # noqa: C901
         crumbs = [
             Crumb("Dashboard", reverse_lazy("dashboard")),
         ]
@@ -209,7 +206,7 @@ class CRUDViews(GenericModelView):
 
     lookup_field: str = "pk"
 
-    extra_mixins: list = []
+    extra_mixins = []
 
     @classmethod
     def url_lookup(cls) -> str:
@@ -281,8 +278,8 @@ class CRUDViews(GenericModelView):
                     SortableViewMixin if action == Actions.LIST else None,
                     DefaultTemplateMixin.create_class(cls.model_name()),
                     view,
-                ]
-                + cls.extra_mixins,
+                    *cls.extra_mixins,
+                ],
             )
         )
 
@@ -291,7 +288,7 @@ class CRUDViews(GenericModelView):
         action_class = cls.get_view_class(action)
         return type(
             f"{cls.model._meta.model_name}_{action.value}",
-            cls._get_class_basses(action_class, action),
+            cls._get_class_basses(action_class, action),  # type: ignore
             {**cls.get_defaults(action), **dict(cls.__dict__)},
         ).as_view()
 

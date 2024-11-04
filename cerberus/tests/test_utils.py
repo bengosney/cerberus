@@ -1,16 +1,12 @@
-# Standard Library
 import zoneinfo
 from datetime import date, datetime
 
-# Django
+import pytest
+
 from django.db import models
 from django.test import override_settings
 from django.utils.timezone import is_aware
 
-# Third Party
-import pytest
-
-# Locals
 from ..utils import choice_length, make_aware, minimize_whitespace, rgetattr
 
 

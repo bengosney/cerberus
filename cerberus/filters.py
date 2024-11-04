@@ -1,15 +1,11 @@
-# Standard Library
 from datetime import datetime
 from enum import Enum
 
-# Django
-from django import forms
-
-# Third Party
 from django_filters import rest_framework as filters
 from django_filters.widgets import RangeWidget
 
-# Locals
+from django import forms
+
 from .models import Booking, Customer, Invoice, Pet, Service, Vet
 from .models.booking import BookingStates
 
@@ -123,9 +119,7 @@ class InvoiceFilter(FilterDefaults):
 
     class Meta:
         model = Invoice
-        fields = [
-            "state",
-        ]
+        fields = ["state"]
 
 
 class VetFilter(FilterDefaults):

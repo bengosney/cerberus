@@ -1,8 +1,11 @@
-# Standard Library
 from datetime import datetime
 from typing import TYPE_CHECKING, Self
 
-# Django
+import reversion
+from djmoney.models.managers import money_manager
+from moneyed import Money
+from taggit.managers import TaggableManager
+
 from django.conf import settings
 from django.db import models
 from django.db.models import Count, F, Prefetch, Q, Sum
@@ -10,19 +13,11 @@ from django.db.models.functions import Concat
 from django.db.models.query import QuerySet
 from django.urls import reverse
 
-# Third Party
-import reversion
-from djmoney.models.managers import money_manager
-from moneyed import Money
-from taggit.managers import TaggableManager
-
-# Locals
 from ..fields import SqidsModelField as SqidsField
 
 if TYPE_CHECKING:
     from . import Booking, Charge, Contact, Vet
 
-# Locals
 from .booking import Booking, BookingStates
 from .invoice import Invoice
 from .pet import Pet

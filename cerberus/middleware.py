@@ -1,7 +1,5 @@
-# Standard Library
 from collections.abc import Callable
 
-# Django
 from django.http import HttpRequest, HttpResponse
 from django.utils.cache import patch_vary_headers
 

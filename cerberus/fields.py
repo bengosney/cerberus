@@ -1,16 +1,13 @@
-# Standard Library
 import random
 import zlib
 from functools import lru_cache, partial
 from itertools import groupby
 from operator import attrgetter
 
-# Django
-from django.forms.models import ModelChoiceIterator, ModelMultipleChoiceField
-
-# Third Party
 from django_sqids import SqidsField
-from sqids import Sqids
+from sqids import Sqids  # type: ignore
+
+from django.forms.models import ModelChoiceIterator, ModelMultipleChoiceField
 
 
 @lru_cache
@@ -44,7 +41,7 @@ class SqidsModelField(SqidsField):
         if not decoded_values:
             return None
 
-        if len(decoded_values) < 2:
+        if len(decoded_values) < 2:  # noqa: PLR2004
             raise ValueError("Invalid SQID")
 
         crc32 = zlib.crc32(str(decoded_values[0]).encode())
@@ -74,11 +71,12 @@ class GroupedModelChoiceIterator(ModelChoiceIterator):
         if self.field.empty_label is not None:
             yield ("", self.field.empty_label)
         queryset = self.queryset
-        # Can't use iterator() when queryset uses prefetch_related()
-        if not queryset._prefetch_related_lookups:
-            queryset = queryset.iterator()
-        for group, objs in groupby(queryset, self.groupby):
-            yield (group, [self.choice(obj) for obj in objs])
+        if queryset:
+            # Can't use iterator() when queryset uses prefetch_related()
+            if not queryset._prefetch_related_lookups:  # type: ignore
+                queryset = queryset.iterator()
+            for group, objs in groupby(queryset, self.groupby):
+                yield (group, [self.choice(obj) for obj in objs])
 
 
 class GroupedMultipleModelChoiceField(ModelMultipleChoiceField):

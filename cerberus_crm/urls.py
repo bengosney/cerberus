@@ -1,10 +1,8 @@
-# Django
 from django.conf import settings
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from django.urls import include, path
 
-# Locals
 from .views import htmx_logout_then_login
 
 urlpatterns = [

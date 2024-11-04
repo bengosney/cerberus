@@ -1,8 +1,6 @@
-# Django
 from django import forms
 from django.forms import TextInput
 
-# Locals
 from ..models import Pet
 from ..widgets import TagsWidget
 

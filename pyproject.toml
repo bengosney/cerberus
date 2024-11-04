@@ -19,6 +19,7 @@ requires-python = ">=3.12"
 classifiers = [
   "Programming Language :: Python :: 3 :: Only",
   "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
 ]
 dependencies = [
   "crispy-bulma",
@@ -98,20 +99,28 @@ cerberus = [
 [tool.ruff]
 target-version = "py312"
 line-length = 120
-exclude = [
-  "migrations",
+exclude = [ "migrations" ]
+
+format.indent-style = "space"
+format.quote-style = "double"
+format.docstring-code-format = true
+
+lint.select = [ "C90", "DJ", "E", "ERA", "F", "FURB", "I", "N", "PERF", "PL", "RUF", "UP" ]
+lint.ignore = [ "RUF012" ]
+
+lint.per-file-ignores."test_*.py" = [ "PLR2004" ]
+lint.isort.section-order = [
+  "future",
+  "standard-library",
+  "third-party",
+  "django",
+  "wagtail",
+  "first-party",
+  "local-folder",
 ]
 
-lint.select = [
-  "C90",
-  "DJ",
-  "E4",
-  "E7",
-  "E9",
-  "F",
-  "N",
-  "UP",
-]
+lint.isort.sections.django = [ "django" ]
+lint.isort.sections.wagtail = [ "wagtail" ]
 
 [tool.coverage.run]
 source = [

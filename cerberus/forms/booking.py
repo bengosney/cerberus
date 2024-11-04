@@ -1,10 +1,7 @@
-# Standard Library
 from datetime import datetime, timedelta
 
-# Django
 from django import forms
 
-# Locals
 from ..models import Booking
 from ..utils import minimize_whitespace
 from ..widgets import CheckboxDataOptionAttr, CheckboxTable, SelectDataAttrField, SingleMoneyWidget
@@ -83,20 +80,18 @@ class BookingForm(forms.ModelForm):
             "service": SelectDataAttrField(
                 ["cost.amount", "length_minutes", "cost_per_additional.amount"],
                 attrs={
-                    "@change": minimize_whitespace(
-                        """
-                        if (!cost_changed) {
-                            $nextTick(() => {
-                                const { dataset } = $event.target.options[$event.target.selectedIndex];
-                                cost = (parseFloat(dataset.cost__amount) || 0.0).toFixed(2);
-                                cost_per_additional = (parseFloat(dataset.cost_per_additional__amount) || 0.0).toFixed(2);
-                            });
-                            cost_changed = false;
-                            cost_per_additional_changed = false;
-                        }
-                        $nextTick(() => length = $event.target.options[$event.target.selectedIndex].dataset.length_minutes);
-"""
-                    ),
+                    "@change": minimize_whitespace("""
+if (!cost_changed) {
+    $nextTick(() => {
+        const { dataset } = $event.target.options[$event.target.selectedIndex];
+        cost = (parseFloat(dataset.cost__amount) || 0.0).toFixed(2);
+        cost_per_additional = (parseFloat(dataset.cost_per_additional__amount) || 0.0).toFixed(2);
+    });
+    cost_changed = false;
+    cost_per_additional_changed = false;
+}
+$nextTick(() => length = $event.target.options[$event.target.selectedIndex].dataset.length_minutes);
+"""),
                 },
             ),
             "cost": SingleMoneyWidget(
@@ -147,7 +142,7 @@ CompletableBookingTimeFrames = [
 
 class CompletableBookingForm(forms.Form):
     bookings = forms.ModelMultipleChoiceField(
-        queryset=Booking.objects.completable(),
+        queryset=Booking.objects.completable(),  # type: ignore
         widget=CheckboxTable(
             [
                 "pets.all",
@@ -175,6 +170,6 @@ class CompletableBookingForm(forms.Form):
                     delta = timedelta(days=30)
                 case invalid:
                     raise ValueError(f"Invalid timeframe: {invalid}")
-            self.fields["bookings"].queryset = self.fields["bookings"].queryset.filter(
+            self.fields["bookings"].queryset = self.fields["bookings"].queryset.filter(  # type: ignore
                 start__gte=datetime.now() - delta
             )

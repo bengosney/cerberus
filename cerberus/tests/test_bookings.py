@@ -1,19 +1,15 @@
-# Standard Library
 from collections.abc import Callable, Generator
 from datetime import datetime, timedelta
 from functools import partial
 
-# Django
+import pytest
+from model_bakery import baker
+
 from django.core.exceptions import ValidationError
 from django.db.utils import IntegrityError
 from django.utils import timezone
 from django.utils.timezone import make_aware
 
-# Third Party
-import pytest
-from model_bakery import baker
-
-# Locals
 from ..exceptions import MaxCustomersError, MaxPetsError
 from ..models import Booking, BookingSlot, Charge, Customer, Pet, Service
 from ..models.booking import BookingStates

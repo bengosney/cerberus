@@ -1,7 +1,5 @@
-# Third Party
 import pytest
 
-# Locals
 from ..models import Address, Customer
 
 

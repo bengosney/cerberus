@@ -1,11 +1,8 @@
-# Standard Library
 from datetime import timedelta
 
-# Django
-from django import template
-
-# Third Party
 import humanize
+
+from django import template
 
 register = template.Library()
 

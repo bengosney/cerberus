@@ -1,15 +1,12 @@
-# Standard Library
 import re
 from functools import lru_cache
 from typing import Any
 
-# Django
 from django import template
 from django.template import Node, NodeList, TemplateSyntaxError
 from django.template.context import Context
 from django.template.library import InclusionNode
 
-# Locals
 from ..utils import rget
 
 register = template.Library()
@@ -96,8 +93,9 @@ class SlotNode(template.Node):
 
 @register.tag
 def slot(parser, token) -> Node:
+    # todo: this feels like it couuld be refactored better
     args = token.split_contents()
-    if len(args) < 2:
+    if len(args) < 2:  # noqa: PLR2004
         raise TemplateSyntaxError(f"{args[0]} tag requires at least one argument")
 
     node_list = parser.parse(("endslot",))

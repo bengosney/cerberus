@@ -1,15 +1,12 @@
-# Standard Library
 import inspect
 from collections.abc import Callable
 
-# Django
+from django_htmx.http import HttpResponseClientRedirect
+
 from django.db.models import Model
 from django.http import Http404
 from django.shortcuts import get_object_or_404, redirect
 from django.views import View
-
-# Third Party
-from django_htmx.http import HttpResponseClientRedirect
 
 
 class TransitionView(View):
@@ -50,7 +47,7 @@ class TransitionView(View):
         action_function: Callable = getattr(model, action)
 
         args = {}
-        for name, _ in inspect.signature(action_function).parameters.items():
+        for name in inspect.signature(action_function).parameters.keys():
             if name in request.POST:
                 args[name] = request.POST[name]
 

@@ -1,12 +1,9 @@
-# Standard Library
 from collections.abc import Generator
 from decimal import Decimal
 
-# Third Party
 import pytest
 from model_bakery import baker
 
-# Locals
 from ..exceptions import ChargeRefundError
 from ..models import Charge
 

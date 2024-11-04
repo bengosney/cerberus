@@ -1,10 +1,7 @@
-# Django
-from django.contrib import admin
-
-# Third Party
 from fsm_admin2.admin import FSMTransitionMixin
 
-# Locals
+from django.contrib import admin
+
 from .models import (
     Address,
     Booking,

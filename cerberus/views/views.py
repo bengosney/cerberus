@@ -1,8 +1,6 @@
-# Django
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 
-# Locals
 from ..filters import ServiceFilter, VetFilter
 from ..forms import ServiceForm, VetForm
 from ..models import Service, Vet

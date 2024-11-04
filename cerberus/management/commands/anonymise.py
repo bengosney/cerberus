@@ -1,15 +1,9 @@
-# Standard Library
-
-# Standard Library
 import re
 
-# Django
-from django.core.management.base import BaseCommand
-
-# Third Party
 from faker import Faker
 
-# Locals
+from django.core.management.base import BaseCommand
+
 from ...models import Customer
 
 

@@ -1,19 +1,15 @@
-# Standard Library
 from collections import defaultdict
 from typing import Self
 
-# Django
+from django_htmx.http import HttpResponseClientRedirect
+from vanilla import CreateView, FormView, UpdateView
+
 from django.db import transaction
 from django.forms import inlineformset_factory
 from django.http import HttpRequest, HttpResponse, HttpResponseNotAllowed, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse_lazy
 
-# Third Party
-from django_htmx.http import HttpResponseClientRedirect
-from vanilla import CreateView, FormView, UpdateView
-
-# Locals
 from ..filters import InvoiceFilter
 from ..forms.charge import ChargeForm
 from ..forms.invoice import CustomerUninvoicedChargesForm, InvoiceForm, InvoiceSendForm, UninvoicedChargesForm

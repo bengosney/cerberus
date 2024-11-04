@@ -1,13 +1,8 @@
-# Standard Library
-
-# Standard Library
 from collections.abc import Generator
 
-# Third Party
 import pytest
 from model_bakery import baker
 
-# Locals
 from ..models import Customer
 
 

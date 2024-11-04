@@ -1,7 +1,5 @@
-# Third Party
 from pytest_django.asserts import assertHTMLEqual
 
-# Locals
 from ..templatetags.string_utils import linebreakto, mailto, unslug
 
 

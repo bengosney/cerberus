@@ -1,10 +1,7 @@
-# Standard Library
 from collections import Counter
 
-# Django
 from django.core.management.base import BaseCommand
 
-# Locals
 from ...exceptions import InvalidEmailError
 from ...models import Contact, Customer
 

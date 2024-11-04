@@ -1,14 +1,11 @@
-# Standard Library
 from datetime import timedelta
 
-# Django
-from django.db import models
-from django.urls import reverse
-
-# Third Party
 import reversion
 from django_extensions.db.fields import AutoSlugField
 from djmoney.models.fields import MoneyField
+
+from django.db import models
+from django.urls import reverse
 
 
 @reversion.register()
@@ -25,7 +22,7 @@ class Service(models.Model):
     max_customer = models.IntegerField(default=1)
     display_colour = models.CharField(max_length=255)  # ColorField(default="#000000")
 
-    slug = AutoSlugField(populate_from=["name"])
+    slug = AutoSlugField(populate_from=["name"])  # type: ignore
 
     class Meta:
         ordering = ("name",)

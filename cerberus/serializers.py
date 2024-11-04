@@ -1,17 +1,13 @@
-# Standard Library
 from enum import Enum
 
-# Django
-from django.core.exceptions import ObjectDoesNotExist
-from django.db import transaction
-
-# Third Party
 from django_fsm_log.models import StateLog
 from djmoney.contrib.django_rest_framework.fields import MoneyField
 from rest_framework import serializers
 from taggit.serializers import TaggitSerializer, TagListSerializerField
 
-# Locals
+from django.core.exceptions import ObjectDoesNotExist
+from django.db import transaction
+
 from .models import Address, Booking, BookingSlot, Charge, Contact, Customer, Invoice, Pet, Service, UserSettings, Vet
 
 default_read_only = [
@@ -113,7 +109,9 @@ class ChargeSerializer(DynamicFieldsModelSerializer, NestedObjectSerializer):
 
     class Meta:
         model = Charge
-        exclude = ("polymorphic_ctype",)
+        exclude = [
+            "polymorphic_ctype",
+        ]
         read_only_fields = ["created", "last_updated"]
 
 
@@ -158,9 +156,7 @@ class BookingSerializer(DynamicFieldsModelSerializer):
             "can_move",
             "available_state_transitions",
         ]
-        read_only_fields = default_read_only + [
-            "state",
-        ]
+        read_only_fields = [*default_read_only, "state"]
 
 
 class ToDateTimeSerializer(serializers.Serializer):
@@ -341,5 +337,4 @@ class UserSettingsSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserSettings
         fields = "__all__"
-
         extra_kwargs = {"user": {"read_only": True}}

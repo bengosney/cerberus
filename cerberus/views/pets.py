@@ -1,11 +1,8 @@
-# Django
+from vanilla import CreateView, UpdateView
+
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 
-# Third Party
-from vanilla import CreateView, UpdateView
-
-# Locals
 from ..filters import PetFilter
 from ..forms import PetForm
 from ..models import Customer, Pet

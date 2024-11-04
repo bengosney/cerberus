@@ -1,7 +1,5 @@
-# Django
 from django import forms
 
-# Locals
 from ..fields import GroupedMultipleModelChoiceField
 from ..models import Charge, Customer, Invoice
 from ..utils import minimize_whitespace
@@ -66,7 +64,7 @@ class CustomerUninvoicedChargesForm(forms.Form):
 
     def set_customer(self, customer_id: int | None) -> None:
         self.fields["customer"].initial = customer_id
-        self.fields["charges"].queryset = Charge.objects.filter(
+        self.fields["charges"].queryset = Charge.objects.filter(  # type: ignore
             customer_id=customer_id,
             invoice__isnull=True,
         ).prefetch_related("booking")

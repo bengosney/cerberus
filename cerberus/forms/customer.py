@@ -1,7 +1,5 @@
-# Django
 from django import forms
 
-# Locals
 from ..models import Customer
 from ..widgets import TagsWidget
 

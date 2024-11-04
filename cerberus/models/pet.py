@@ -1,19 +1,15 @@
-# Standard Library
 from datetime import datetime
 from typing import TYPE_CHECKING
 
-# Django
+import reversion
+from humanize import naturaldelta
+from taggit.managers import TaggableManager
+
 from django.db import models
 from django.db.models.query import QuerySet
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 
-# Third Party
-import reversion
-from humanize import naturaldelta
-from taggit.managers import TaggableManager
-
-# Locals
 from ..fields import SqidsModelField as SqidsField
 from ..utils import choice_length
 

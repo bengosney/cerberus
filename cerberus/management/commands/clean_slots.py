@@ -1,11 +1,8 @@
-# Standard Library
 from contextlib import suppress
 
-# Django
 from django.core.management.base import BaseCommand
 from django.db.models import ProtectedError
 
-# Locals
 from ...models import BookingSlot
 
 

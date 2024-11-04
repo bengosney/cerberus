@@ -1,11 +1,8 @@
-# Django
+import pytest
+
 from django.http import HttpResponse
 from django.test import RequestFactory
 
-# Third Party
-import pytest
-
-# Locals
 from ..middleware import HtmxVaryHeaderMiddleware
 
 

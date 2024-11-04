@@ -1,4 +1,3 @@
-# Locals
 from .booking import (
     BookingCalenderDay,
     BookingCalenderMonth,

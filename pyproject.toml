@@ -105,8 +105,10 @@ format.indent-style = "space"
 format.quote-style = "double"
 format.docstring-code-format = true
 
-lint.select = [ "C90", "DJ", "E", "ERA", "F", "FURB", "I", "N", "PERF", "PL", "RUF", "TRY", "UP" ]
+lint.select = [ "C90", "DJ", "E", "ERA", "F", "FURB", "I", "N", "PERF", "PL", "RUF", "UP" ]
+lint.ignore = [ "RUF012" ]
 
+lint.per-file-ignores."test_*.py" = [ "PLR2004" ]
 lint.isort.section-order = [
   "future",
   "standard-library",

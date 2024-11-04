@@ -1,19 +1,15 @@
-# Standard Library
 from collections.abc import Generator
 from datetime import date, timedelta
 from decimal import Decimal
 
-# Django
-from django.conf import settings
-
-# Third Party
 import pytest
 from django_fsm import TransitionNotAllowed
 from model_bakery import baker
 from moneyed import Money
 from xhtml2pdf.context import pisaContext
 
-# Locals
+from django.conf import settings
+
 from ..model_utils import Transition
 from ..models import Charge, Customer, Invoice, Payment
 
@@ -169,9 +165,7 @@ def test_create_partial_payments(invoice: Invoice):
 
 @pytest.mark.django_db
 def test_totals_match():
-    customers = []
-    for _ in range(10):
-        customers.append(baker.make(Customer, invoice_email="bob@example.com"))
+    customers = [baker.make(Customer, invoice_email="bob@example.com") for _ in range(10)]
 
     for i in range(20):
         invoice: Invoice = baker.make(Invoice, customer=customers[i % len(customers)])
@@ -194,9 +188,7 @@ def test_totals_match():
 
 @pytest.mark.django_db
 def test_totals_match_annotation():
-    customers = []
-    for _ in range(10):
-        customers.append(baker.make(Customer, invoice_email="bob@example.com"))
+    customers = [baker.make(Customer, invoice_email="bob@example.com") for _ in range(10)]
 
     for i in range(20):
         invoice: Invoice = baker.make(Invoice, customer=customers[i % len(customers)])

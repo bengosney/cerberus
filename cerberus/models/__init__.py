@@ -1,7 +1,5 @@
-# Standard Library
 from datetime import datetime, timedelta
 
-# Locals
 from .address import Address
 from .booking import Booking, BookingCharge, BookingSlot
 from .charge import Charge

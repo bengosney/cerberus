@@ -1,16 +1,12 @@
-# Standard Library
 from collections.abc import Callable, Iterable
 from typing import Any
 
-# Django
+from djmoney.forms import MoneyWidget
+
 from django import forms
 from django.forms import widgets
 from django.utils.html import escape
 
-# Third Party
-from djmoney.forms import MoneyWidget
-
-# Locals
 from .utils import rgetattr
 
 
@@ -50,7 +46,7 @@ class OptionAttrs(widgets.ChoiceWidget):
         super().__init__(*args, **kwargs)
         self.attr_callback = attr_callback
 
-    def create_option(
+    def create_option(  # noqa: PLR0913
         self,
         name: str,
         value: Any,
@@ -89,7 +85,7 @@ class DataAttrField(widgets.ChoiceWidget):
         self.model_fields = model_field if isinstance(model_field, list) else [model_field]
         self.default_attr_value = default_attr_value
 
-    def create_option(
+    def create_option(  # noqa: PLR0913
         self,
         name: str,
         value: Any,
@@ -150,7 +146,7 @@ class CheckboxDataOptionAttr(OptionAttrs, DataAttrField, forms.CheckboxSelectMul
 
 class CheckboxTable(forms.CheckboxSelectMultiple):
     model_fields: list[str]
-    model_titles: list[str] = []
+    model_titles: list[str]
     empty_text: str | None
 
     crispy_template = "cerberus/widgets/checkbox_table.html"
@@ -169,7 +165,7 @@ class CheckboxTable(forms.CheckboxSelectMultiple):
         self.empty_text = empty_text
         super().__init__(*args, **kwargs)
 
-    def create_option(
+    def create_option(  # noqa: PLR0913
         self,
         name: str,
         value: Any,

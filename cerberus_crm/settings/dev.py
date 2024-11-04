@@ -1,6 +1,3 @@
-# Standard Library
-
-# Locals
 from .base import *  # noqa
 from .base import INSTALLED_APPS, MIDDLEWARE
 

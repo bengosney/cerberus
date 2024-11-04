@@ -1,7 +1,5 @@
-# Standard Library
 from collections.abc import Generator
 
-# Django
 from django import template
 from django.core.paginator import Paginator
 

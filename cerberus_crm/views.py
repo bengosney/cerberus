@@ -1,10 +1,8 @@
-# Django
+from django_htmx.http import HttpResponseClientRedirect
+
 from django.conf import settings
 from django.contrib.auth import views as auth_views
 from django.shortcuts import resolve_url
-
-# Third Party
-from django_htmx.http import HttpResponseClientRedirect
 
 
 class HtmxLogoutView(auth_views.LogoutView):

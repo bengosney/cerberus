@@ -1,4 +1,3 @@
-# Standard Library
 from collections.abc import Callable, Iterable, Iterator
 from datetime import date, datetime, timedelta
 from enum import Enum, auto
@@ -6,24 +5,20 @@ from functools import reduce
 from operator import or_
 from typing import TYPE_CHECKING, Self
 
-# Django
-from django.core.exceptions import ValidationError
-from django.db import models, transaction
-from django.db.models import CheckConstraint, F, Max, Min, Q
-from django.db.models.query import QuerySet
-from django.urls import reverse
-from django.utils.functional import lazy
-
-# Third Party
 import reversion
 from django_fsm import FSMField, Transition, transition
 from djmoney.models.fields import MoneyField
 from humanize import naturaldate
 from zeal import zeal_ignore
 
-# Locals
+from django.db import models, transaction
+from django.db.models import CheckConstraint, F, Max, Min, Q
+from django.db.models.query import QuerySet
+from django.urls import reverse
+from django.utils.functional import lazy
+
 from ..decorators import save_after
-from ..exceptions import IncorectServiceError, MaxCustomersError, MaxPetsError, SlotOverlapsError
+from ..exceptions import DiffrentCustomerError, IncorectServiceError, MaxCustomersError, MaxPetsError, SlotOverlapsError
 from ..fields import SqidsModelField as SqidsField
 from ..model_utils import TransitionActionsMixin
 from ..utils import make_aware
@@ -101,16 +96,16 @@ class BookingSlot(models.Model):
 
     def clean(self) -> None:
         if self.overlaps():
-            raise ValidationError(f"{self.__class__.__name__} overlaps another {self.__class__.__name__}")
+            raise SlotOverlapsError()
 
         if len({booking.service.id for booking in self.bookings.all()}) > 1:
-            raise ValidationError(f"{self.__class__.__name__} has multiple services")
+            raise IncorectServiceError()
 
         if (max_pet := getattr(self.service, "max_pet")) and self.pet_count > max_pet:
-            raise ValidationError(f"{self.__class__.__name__} has max pets for service, {max_pet}")
+            raise MaxPetsError(max_pet)
 
         if (max_customer := getattr(self.service, "max_customer")) and self.customer_count > max_customer:
-            raise ValidationError(f"{self.__class__.__name__} has max customers for service, {max_customer}")
+            raise MaxCustomersError(max_customer)
 
         super().clean()
 
@@ -134,13 +129,13 @@ class BookingSlot(models.Model):
         overlaps = self.get_overlapping()
         if overlaps.count():
             if overlaps.count() > 1:
-                raise SlotOverlapsError("Slot overlaps multiple slots")
+                raise SlotOverlapsError()
 
             if (overlapping := overlaps.first()) and self.matches(overlapping):
                 overlapping += self
                 return True
 
-            raise SlotOverlapsError("Slot overlaps another")
+            raise SlotOverlapsError()
 
         with transaction.atomic():
             self.save()
@@ -204,7 +199,7 @@ class BookingSlot(models.Model):
 
         if isinstance(other, self.__class__):
             if not self.matches(other):
-                raise ValueError("Slots do not match")
+                raise IncorectServiceError()
 
             with transaction.atomic():
                 for booking in other.bookings.all():
@@ -212,7 +207,7 @@ class BookingSlot(models.Model):
                     booking.save()
             return self
 
-        raise ValueError("Invalid type")
+        raise IncorectServiceError()
 
 
 class BookingStates(models.TextChoices):
@@ -254,21 +249,21 @@ class BookingQuerySet(models.QuerySet):
 
 @reversion.register()
 class Booking(models.Model, TransitionActionsMixin):
-    STATES_MOVEABLE: list[str] = [
+    STATES_MOVEABLE = [
         BookingStates.ENQUIRY.value,
         BookingStates.PRELIMINARY.value,
         BookingStates.CONFIRMED.value,
     ]
-    STATES_CANCELABLE: list[str] = [
+    STATES_CANCELABLE = [
         BookingStates.ENQUIRY.value,
         BookingStates.PRELIMINARY.value,
         BookingStates.CONFIRMED.value,
     ]
-    STATES_CONFIRMABLE: list[str] = [
+    STATES_CONFIRMABLE = [
         BookingStates.ENQUIRY.value,
         BookingStates.PRELIMINARY.value,
     ]
-    STATES_COMPLETABLE: list[str] = [
+    STATES_COMPLETABLE = [
         BookingStates.CONFIRMED.value,
         BookingStates.PRELIMINARY.value,
     ]
@@ -344,7 +339,7 @@ class Booking(models.Model, TransitionActionsMixin):
 
     def check_valid(self) -> None:
         if any(pet.customer != self.customer for pet in self.pets.all()):
-            raise ValidationError("Booking has pets from a different customer")
+            raise DiffrentCustomerError()
 
     def natural_date(self):
         return naturaldate(self.start)
@@ -369,7 +364,7 @@ class Booking(models.Model, TransitionActionsMixin):
     def booking_slot(self) -> BookingSlot:
         if self._booking_slot is None:
             if self.state == BookingStates.CANCELED.value:
-                raise (BookingSlot.DoesNotExist("Booking has been canceled"))
+                raise BookingSlot.DoesNotExist("Booking has been canceled")
             self._booking_slot = self._get_new_booking_slot()
         return self._booking_slot
 
@@ -416,19 +411,19 @@ class Booking(models.Model, TransitionActionsMixin):
         slot = BookingSlot.get_slot(self.start, self.end)
 
         if slot.service != self.service and slot.service is not None:
-            raise IncorectServiceError("Booking is for a different service")
+            raise IncorectServiceError()
 
         if slot.pet_count >= self.service.max_pet:
-            raise MaxPetsError(f"Booking has max pets for service, {self.service.max_pet}")
+            raise MaxPetsError(self.service.max_pet)
 
         if slot.customer_count >= self.service.max_customer and self.customer not in slot.customers:
-            raise MaxCustomersError(f"Booking has max customers for service, {self.service.max_customer}")
+            raise MaxCustomersError(self.service.max_customer)
 
         if slot.overlaps():
             overlaps = slot.get_overlapping()
 
             if not all(all(b.id == self.id for b in o.bookings.all()) for o in overlaps):
-                raise SlotOverlapsError("Booking overlaps another")
+                raise SlotOverlapsError()
 
         return slot
 

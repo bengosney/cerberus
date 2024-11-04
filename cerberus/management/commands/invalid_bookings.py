@@ -1,8 +1,6 @@
-# Django
 from django.core.exceptions import ValidationError
 from django.core.management.base import BaseCommand
 
-# Locals
 from ...models import Booking
 
 

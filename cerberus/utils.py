@@ -1,10 +1,8 @@
-# Standard Library
 import functools
 import re
 from datetime import date, datetime
 from functools import lru_cache
 
-# Django
 from django.conf import settings
 from django.db import models
 from django.utils.timezone import make_aware as django_make_aware
@@ -35,7 +33,7 @@ def rgetattr(obj: object, attr: str, *args):
     def _getattr(obj, attr):
         return getattr(obj, attr, *args)
 
-    return functools.reduce(_getattr, [obj] + attr.split("."))
+    return functools.reduce(_getattr, [obj, *attr.split(".")])
 
 
 def rget(obj: object, attr: str, *args):
@@ -45,4 +43,4 @@ def rget(obj: object, attr: str, *args):
         except AttributeError:
             return getattr(obj, attr, *args)
 
-    return functools.reduce(_get, [obj] + attr.split("."))
+    return functools.reduce(_get, [obj, *attr.split(".")])

@@ -9,11 +9,9 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
-# Standard Library
 import datetime
 from pathlib import Path
 
-# Third Party
 from moneyed import GBP
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.

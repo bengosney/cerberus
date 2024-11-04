@@ -1,11 +1,8 @@
-# Django
+import reversion
+
 from django.db import models
 from django.urls import reverse
 
-# Third Party
-import reversion
-
-# Locals
 from ..fields import SqidsModelField as SqidsField
 
 

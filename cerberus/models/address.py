@@ -1,8 +1,6 @@
-# Django
-from django.db import models
-
-# Third Party
 import reversion
+
+from django.db import models
 
 
 @reversion.register()

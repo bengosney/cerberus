@@ -1,4 +1,3 @@
-# Locals
 from .booking import BookingForm, CompletableBookingForm
 from .charge import ChargeForm
 from .contact import ContactForm

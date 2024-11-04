@@ -1,12 +1,9 @@
-# Django
-from django.conf import settings
-from django.urls import include, path
-
-# Third Party
 from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, SpectacularSwaggerView
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView, TokenVerifyView
 
-# Locals
+from django.conf import settings
+from django.urls import include, path
+
 from .. import api, reports
 
 urlpatterns = [

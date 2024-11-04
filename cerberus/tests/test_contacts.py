@@ -1,14 +1,11 @@
-# Standard Library
 from collections.abc import Generator
 from itertools import product
 
-# Third Party
 import pytest
 from hypothesis import given
 from hypothesis import strategies as st
 from model_bakery import baker
 
-# Locals
 from ..models import Contact
 
 

@@ -1,16 +1,7 @@
-# Standard Library
 import contextlib
 from datetime import datetime, timedelta
 from wsgiref.util import FileWrapper
 
-# Django
-from django.contrib.staticfiles import finders
-from django.db import transaction
-from django.db.models.query import QuerySet
-from django.http import HttpResponse
-from django.urls import path
-
-# Third Party
 from django_filters import rest_framework as filters
 from django_fsm import TransitionNotAllowed
 from django_fsm_log.helpers import FSMLogDescriptor
@@ -21,7 +12,12 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from taggit.models import Tag
 
-# Locals
+from django.contrib.staticfiles import finders
+from django.db import transaction
+from django.db.models.query import QuerySet
+from django.http import HttpResponse
+from django.urls import path
+
 from .filters import BookingFilter, CustomerFilter, InvoiceFilter, PetFilter
 from .models import Address, Booking, BookingSlot, Charge, Contact, Customer, Invoice, Pet, Service, UserSettings, Vet
 from .permissions import IsUsers
@@ -395,7 +391,7 @@ class TagListView(APIView):
 class UserSettingsViewSet(ChangeStateMixin, viewsets.ModelViewSet):
     queryset = UserSettings.objects.all()
     serializer_class = UserSettingsSerializer
-    permission_classes = default_permissions + [IsUsers]
+    permission_classes = [*default_permissions, IsUsers]
 
 
 router = routers.DefaultRouter()

@@ -1,7 +1,5 @@
-# Django
 from django import forms
 
-# Locals
 from ..models import Service
 from ..widgets import SingleMoneyWidget
 

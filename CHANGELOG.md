@@ -1,5 +1,9 @@
 ## Unreleased
 
+### Feat
+
+- **deps**: update the deps
+
 ### Fix
 
 - **migration**: add missing migration
@@ -7,6 +11,7 @@
 
 ### Refactor
 
+- **linting**: increate ruff linting and fix all the issues
 - **deps**: zelot has been renamed to zeal
 
 ## v0.2.0 (2024-07-20)

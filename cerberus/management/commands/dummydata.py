@@ -172,6 +172,7 @@ class Command(BaseCommand):
                                 quantity=random.randrange(1, 5),
                                 name=service["name"],
                                 invoice=invoice,
+                                customer=customer,
                             )
                             charge.save()
 

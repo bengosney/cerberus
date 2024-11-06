@@ -6,6 +6,7 @@
 
 ### Fix
 
+- **dummy-data**: fix dummy invoices, charges require a customer
 - **migration**: add missing migration
 - **n+1**: ignore some n+1 errors
 

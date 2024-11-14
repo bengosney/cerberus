@@ -552,9 +552,9 @@ executing==2.1.0 \
     --hash=sha256:8d63781349375b5ebccc3142f4b30350c0cd9c79f921cde38be2be4637e98eaf \
     --hash=sha256:8ea27ddd260da8150fa5a708269c4a10e76161e2496ec3e587da9e3c0fe4b9ab
     # via icecream
-faker==32.1.0 \
-    --hash=sha256:aac536ba04e6b7beb2332c67df78485fc29c1880ff723beac6d1efd45e2f10f5 \
-    --hash=sha256:c77522577863c264bdc9dad3a2a750ad3f7ee43ff8185072e482992288898814
+faker==33.0.0 \
+    --hash=sha256:68e5580cb6b4226710886e595eabc13127149d6e71e9d1db65506a7fbe2c7fce \
+    --hash=sha256:9b01019c1ddaf2253ca2308c0472116e993f4ad8fc9905f82fa965e0c6f932e9
     # via cerberus (pyproject.toml)
 filelock==3.16.1 \
     --hash=sha256:2082e5703d51fbf98ea75855d9d5527e33d8ff23099bec374a134febee6946b0 \

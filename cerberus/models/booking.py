@@ -215,7 +215,6 @@ class BookingSlot(models.Model):
 
 
 class BookingStates(models.TextChoices):
-    ENQUIRY = "enquiry"
     PRELIMINARY = "preliminary"
     CONFIRMED = "confirmed"
     CANCELED = "canceled"
@@ -254,17 +253,14 @@ class BookingQuerySet(models.QuerySet):
 @reversion.register()
 class Booking(models.Model, TransitionActionsMixin):
     STATES_MOVEABLE = [
-        BookingStates.ENQUIRY.value,
         BookingStates.PRELIMINARY.value,
         BookingStates.CONFIRMED.value,
     ]
     STATES_CANCELABLE = [
-        BookingStates.ENQUIRY.value,
         BookingStates.PRELIMINARY.value,
         BookingStates.CONFIRMED.value,
     ]
     STATES_CONFIRMABLE = [
-        BookingStates.ENQUIRY.value,
         BookingStates.PRELIMINARY.value,
     ]
     STATES_COMPLETABLE = [

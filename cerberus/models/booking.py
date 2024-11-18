@@ -1,3 +1,4 @@
+import uuid
 from collections.abc import Callable, Iterable, Iterator
 from datetime import date, datetime, timedelta
 from enum import Enum, auto
@@ -6,11 +7,14 @@ from operator import or_
 from typing import TYPE_CHECKING, Self
 
 import reversion
+from dateutil.rrule import WEEKLY, rrule, rruleset
 from django_fsm import FSMField, Transition, transition
 from djmoney.models.fields import MoneyField
 from humanize import naturaldate
 from zeal import zeal_ignore
 
+from django.core.exceptions import ValidationError
+from django.core.validators import validate_comma_separated_integer_list
 from django.db import models, transaction
 from django.db.models import CheckConstraint, F, Max, Min, Q
 from django.db.models.query import QuerySet
@@ -293,6 +297,9 @@ class Booking(models.Model, TransitionActionsMixin):
     customer = models.ForeignKey("cerberus.Customer", on_delete=models.PROTECT, related_name="bookings")
     pets = models.ManyToManyField("cerberus.Pet", related_name="bookings")
     service = models.ForeignKey("cerberus.Service", on_delete=models.PROTECT, related_name="bookings")
+    schedule = models.ForeignKey(
+        "cerberus.BookingSchedule", on_delete=models.PROTECT, related_name="bookings", null=True, blank=True
+    )
     _booking_slot = models.ForeignKey(
         "cerberus.BookingSlot", on_delete=models.PROTECT, related_name="bookings", null=True, blank=True
     )
@@ -515,3 +522,54 @@ class Booking(models.Model, TransitionActionsMixin):
 
 class BookingCharge(Charge):
     booking = models.ForeignKey(Booking, on_delete=models.PROTECT, related_name="charges")
+
+
+class BookingSchedule(models.Model):
+    schedule_id = models.UUIDField(default=uuid.uuid4, editable=False)
+
+    interval = models.PositiveIntegerField(default=1)
+    days_of_week = models.CharField(validators=[validate_comma_separated_integer_list], max_length=7)
+    start_date = models.DateField(default=date.today)
+    end_date = models.DateField(null=True, blank=True)
+    count = models.PositiveIntegerField(default=0)
+
+    cost = MoneyField(max_digits=14, default=0.0)
+    cost_per_additional = MoneyField(max_digits=14, default=0.0, blank=True, null=True)
+
+    created = models.DateTimeField(auto_now_add=True, editable=False)
+    last_updated = models.DateTimeField(auto_now=True, editable=False)
+
+    pets = models.ManyToManyField("cerberus.Pet", related_name="bookingschedules")
+    service = models.ForeignKey("cerberus.Service", on_delete=models.PROTECT, related_name="bookingschedules")
+
+    def __str__(self) -> str:
+        rruleset = self.rruleset()
+        ret = str(rruleset._rrule[0])
+        ret += "\nEXDATE:"
+        for rdate in rruleset._exdate:
+            ret += rdate.strftime("%Y%m%dT%H%M%S") + ","
+        return ret[:-1]
+
+    def clean(self):
+        if not self.end_date and self.count == 0:
+            raise ValidationError("Either end_date or count must be provided.")
+
+        if self.end_date and self.count > 0:
+            raise ValidationError("Only one of end_date or count can be provided.")
+
+        return super().clean()
+
+    def rrule(self) -> rrule:
+        return rrule(
+            freq=WEEKLY,
+            byweekday=[int(day) for day in self.days_of_week.split(",")],
+            interval=self.interval,
+            dtstart=self.start_date,
+            until=self.end_date,
+        )
+
+    def rruleset(self) -> rruleset:
+        ruleset = rruleset()
+        ruleset.rrule(self.rrule())
+
+        return ruleset

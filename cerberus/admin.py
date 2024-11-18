@@ -5,6 +5,7 @@ from django.contrib import admin
 from .models import (
     Address,
     Booking,
+    BookingSchedule,
     BookingSlot,
     Charge,
     Contact,
@@ -41,6 +42,11 @@ class BookingAdmin(admin.ModelAdmin):
 
 @admin.register(BookingSlot)
 class BookingSlotAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(BookingSchedule)
+class BookingScheduleAdmin(admin.ModelAdmin):
     pass
 
 

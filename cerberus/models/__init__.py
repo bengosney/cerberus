@@ -1,7 +1,7 @@
 from datetime import datetime, timedelta
 
 from .address import Address
-from .booking import Booking, BookingCharge, BookingSlot
+from .booking import Booking, BookingCharge, BookingSchedule, BookingSlot
 from .charge import Charge
 from .contact import Contact
 from .customer import Customer
@@ -21,6 +21,7 @@ __all__ = [
     "Booking",
     "BookingSlot",
     "BookingCharge",
+    "BookingSchedule",
     "Charge",
     "Contact",
     "Customer",

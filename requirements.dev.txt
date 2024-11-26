@@ -280,9 +280,9 @@ colorama==0.4.6 \
     #   commitizen
     #   icecream
     #   pytest-django-queries
-commitizen==3.31.0 \
-    --hash=sha256:6ab973e91d07c1e745c6c0efe6dd0708b1f6d8fd7e4ab5e7c773b5ceb3df4ff0 \
-    --hash=sha256:a28df7ab5b8665d48796c422a97dcfae0d0fce7e2d28404c0e386cf1ebd42c8f
+commitizen==4.0.0 \
+    --hash=sha256:16aff27e01b43015eab1c74eabbca3e284b4988dd1b146a0963282db241dc2c0 \
+    --hash=sha256:52873ee589a64cf77fc55570dbd3f987c6ffcd33132d179eb625c4d06ae935f7
     # via cerberus (pyproject.toml)
 coverage==7.6.8 \
     --hash=sha256:093896e530c38c8e9c996901858ac63f3d4171268db2c9c8b373a228f459bbc5 \

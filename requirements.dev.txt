@@ -546,9 +546,9 @@ djangorestframework-stubs==3.15.1 \
     --hash=sha256:34539871895d66d382b6ae3655d9f95c1de7733cf50bc29097638d367ed3117d \
     --hash=sha256:79dc9018f5d5fa420f9981eec9f1e820ecbd04719791f144419cdc6c5b8e29bd
     # via cerberus (pyproject.toml)
-drf-spectacular==0.27.2 \
-    --hash=sha256:a199492f2163c4101055075ebdbb037d59c6e0030692fc83a1a8c0fc65929981 \
-    --hash=sha256:b1c04bf8b2fbbeaf6f59414b4ea448c8787aba4d32f76055c3b13335cf7ec37b
+drf-spectacular==0.28.0 \
+    --hash=sha256:2c778a47a40ab2f5078a7c42e82baba07397bb35b074ae4680721b2805943061 \
+    --hash=sha256:856e7edf1056e49a4245e87a61e8da4baff46c83dbc25be1da2df77f354c7cb4
     # via cerberus (pyproject.toml)
 executing==2.1.0 \
     --hash=sha256:8d63781349375b5ebccc3142f4b30350c0cd9c79f921cde38be2be4637e98eaf \

@@ -10,14 +10,14 @@ from .vet import VetForm
 __all__ = [
     "BookingForm",
     "ChargeForm",
-    "ContactForm",
     "CompletableBookingForm",
+    "ContactForm",
     "CustomerForm",
+    "CustomerUninvoicedChargesForm",
     "InvoiceForm",
     "InvoiceSendForm",
     "PetForm",
     "ServiceForm",
     "UninvoicedChargesForm",
-    "CustomerUninvoicedChargesForm",
     "VetForm",
 ]

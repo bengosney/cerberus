@@ -3,20 +3,15 @@
     &:has(.checkbox) {
       min-width: max-content;
       max-height: calc(
-        (
-            1rem * var(--pico-line-height) +
-              var(--pico-form-element-spacing-vertical) * 2 +
-              var(--pico-border-width) * 2
-          ) + 2rem
+        (1rem * var(--pico-line-height) + var(--pico-form-element-spacing-vertical) * 2 + var(--pico-border-width) * 2) +
+          2rem
       );
     }
 
     div:has(> .checkbox) {
       position: relative;
       max-height: calc(
-        1rem * var(--pico-line-height) +
-          var(--pico-form-element-spacing-vertical) * 2 +
-          var(--pico-border-width) * 2
+        1rem * var(--pico-line-height) + var(--pico-form-element-spacing-vertical) * 2 + var(--pico-border-width) * 2
       );
       overflow: hidden;
       background: var(--pico-background-color);

@@ -3,7 +3,7 @@
     x-data="{ start: '{{ widget.subwidgets.0.value|default_if_none:'' }}', stop: '{{ widget.subwidgets.1.value|default_if_none:'' }}' }"
     x-init="start = stop ? Math.min(parseInt(start), parseInt(stop) - 1) : start; stop = start ? Math.max(parseInt(start) + 1, parseInt(stop)) : stop"
 >
-    {% with widget.subwidgets.0 as widget %}
+    {% with widget=widget.subwidgets.0 %}
         <input
             x-model="start"
             type="number"
@@ -15,7 +15,7 @@
         />
     {% endwith %}
     <span>-</span>
-    {% with widget.subwidgets.1 as widget %}
+    {% with widget=widget.subwidgets.1 %}
         <input
             x-model="stop"
             type="number"

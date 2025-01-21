@@ -30,8 +30,7 @@
     padding: 0 0.5em;
     margin-bottom: 1em;
 
-    border-bottom: var(--pico-tab-border-width) solid
-      var(--pico-tab-border-color);
+    border-bottom: var(--pico-tab-border-width) solid var(--pico-tab-border-color);
 
     & > * {
       padding: calc(var(--pico-spacing) / 2) var(--pico-spacing);
@@ -43,13 +42,11 @@
       text-decoration: none;
 
       &:hover {
-        border-color: var(--pico-tab-border-color-hover)
-          var(--pico-tab-border-color-hover) transparent;
+        border-color: var(--pico-tab-border-color-hover) var(--pico-tab-border-color-hover) transparent;
       }
 
       &.active {
-        border-color: var(--pico-tab-border-color) var(--pico-tab-border-color)
-          var(--pico-tab-background-color);
+        border-color: var(--pico-tab-border-color) var(--pico-tab-border-color) var(--pico-tab-background-color);
       }
     }
   }

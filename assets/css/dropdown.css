@@ -70,8 +70,7 @@ details[role="list"] {
 
     & + li {
       a {
-        border-top: var(--pico-border-width) solid
-          var(--pico-dropdown-border-color);
+        border-top: var(--pico-border-width) solid var(--pico-dropdown-border-color);
       }
     }
   }

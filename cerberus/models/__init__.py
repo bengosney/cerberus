@@ -19,8 +19,8 @@ def get_default_due_date() -> datetime:
 __all__ = [
     "Address",
     "Booking",
-    "BookingSlot",
     "BookingCharge",
+    "BookingSlot",
     "Charge",
     "Contact",
     "Customer",

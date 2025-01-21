@@ -1,7 +1,5 @@
 :root {
-  --form-element-spacing-vertical: calc(
-    var(--form-element-spacing-horizontal) / 2
-  );
+  --form-element-spacing-vertical: calc(var(--form-element-spacing-horizontal) / 2);
 }
 
 :root {

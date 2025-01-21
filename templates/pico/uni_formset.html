@@ -1,4 +1,4 @@
-{% with formset.management_form as form %}
+{% with form=formset.management_form %}
     {% include 'pico/uni_form.html' %}
 {% endwith %}
 {% for form in formset %}

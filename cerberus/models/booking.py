@@ -65,6 +65,27 @@ class BookingSlot(models.Model):
     def __str__(self) -> str:
         return f"{self.id}: {self.start} - {self.end}"
 
+    def __add__(self, other: "Self|Booking") -> Self:
+        if isinstance(other, Booking):
+            with transaction.atomic():
+                other.booking_slot = self
+                other.start = self.start
+                other.end = self.end
+                other.save()
+            return self
+
+        if isinstance(other, self.__class__):
+            if not self.matches(other):
+                raise IncorectServiceError()
+
+            with transaction.atomic():
+                for booking in other.bookings.all():
+                    booking.move_booking(self.start)
+                    booking.save()
+            return self
+
+        raise IncorectServiceError()
+
     @classmethod
     def get_slot(cls, start: datetime, end: datetime) -> Self:
         try:
@@ -187,27 +208,6 @@ class BookingSlot(models.Model):
     @property
     def customer_count(self) -> int:
         return len(self.customers)
-
-    def __add__(self, other: "Self|Booking") -> Self:
-        if isinstance(other, Booking):
-            with transaction.atomic():
-                other.booking_slot = self
-                other.start = self.start
-                other.end = self.end
-                other.save()
-            return self
-
-        if isinstance(other, self.__class__):
-            if not self.matches(other):
-                raise IncorectServiceError()
-
-            with transaction.atomic():
-                for booking in other.bookings.all():
-                    booking.move_booking(self.start)
-                    booking.save()
-            return self
-
-        raise IncorectServiceError()
 
 
 class BookingStates(models.TextChoices):

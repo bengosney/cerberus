@@ -1,9 +1,6 @@
 .year-calender {
   display: grid;
-  grid-template-columns: repeat(
-    auto-fit,
-    minmax(max(min(200px, 100%), calc(25% - 0.75em)), 1fr)
-  );
+  grid-template-columns: repeat(auto-fit, minmax(max(min(200px, 100%), calc(25% - 0.75em)), 1fr));
   gap: 1rem;
 
   & > * {

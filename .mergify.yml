@@ -19,9 +19,9 @@ pull_request_rules:
 
 - name: Merge Github Actions changelog updates
   conditions:
-    - author=github-actions[bot]
-    - check-success=workflow
-    - title=Update Changelog
+  - author=github-actions[bot]
+  - check-success=workflow
+  - title=Update Changelog
   actions:
     merge:
       method: merge

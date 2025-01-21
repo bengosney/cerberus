@@ -1,7 +1,7 @@
 exclude: migrations/.*\.py|Procfile|[aw]sgi\.py|node_modules|.git|\.polar|inputs/.*
 repos:
 - repo: https://github.com/adamchainz/django-upgrade
-  rev: 1.22.1
+  rev: 1.22.2
   hooks:
   - id: django-upgrade
     args: [--target-version, '5.0']
@@ -25,7 +25,7 @@ repos:
   - id: mixed-line-ending
     args: [--fix, lf]
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: v0.7.2
+  rev: v0.9.2
   hooks:
   - id: ruff
     args: [--fix]
@@ -59,6 +59,6 @@ repos:
   hooks:
   - id: rstcheck
 - repo: https://github.com/commitizen-tools/commitizen
-  rev: v3.30.0
+  rev: v4.1.0
   hooks:
   - id: commitizen
